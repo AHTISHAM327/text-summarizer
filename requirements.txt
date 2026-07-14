@@ -1,0 +1,4 @@
+# No paid API dependencies yet
+# Week 1: Using Claude Pro chat (free) for prompt testing
+# Will add SDK here only when needed in later weeks
+python-dotenv==1.0.0
