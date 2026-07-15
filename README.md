@@ -12,7 +12,7 @@ Reading long documents takes time. Whether it's a report, an article, or meeting
 pip install -r requirements.txt
 ```
 
-Requires Python 3.8 or newer.
+Requires Python 3.8 or newer, and a `GEMINI_API_KEY` in a `.env` file in the project root.
 
 ## Usage
 
@@ -40,9 +40,7 @@ parking and noise. A final vote is scheduled for next month, with construction
 potentially starting in early spring.
 ```
 
-> **Note:** The summary above shows the target output once API integration
-> lands (see *Current status* below). The current build prints a placeholder
-> summary while prompts are being tested in Claude Pro chat.
+The summary above is real output from the Gemini API using the tested prompt.
 
 ## Current status
 
@@ -51,14 +49,13 @@ potentially starting in early spring.
 - [x] File loading with validation
 - [x] Error handling (missing, empty, or invalid files)
 - [x] Prompt engineering (tested and versioned)
+- [x] API integration (Gemini API)
 
 **Coming**
-- [ ] API integration
 - [ ] JSON output
 - [ ] Batch processing (summarize multiple files at once)
 
 ## Notes
 
-- **No paid API costs so far** — prompt development and testing is done through Claude Pro chat during this phase.
 - The summarization prompt lives in `prompts.py` and has been tested manually; the winning version is committed with notes on why it won.
-- API integration is the next milestone, at which point the SDK dependency will be added to `requirements.txt`.
+- API calls use the Gemini API (`google-genai` SDK) and require a `GEMINI_API_KEY` set in a `.env` file (see `python-dotenv` in `requirements.txt`).

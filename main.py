@@ -8,9 +8,20 @@ Exits with status 0 on success and 1 on any error, so the tool can be
 used safely in shell scripts and pipelines.
 """
 
+import os
 import sys
 
+import httpx
+from dotenv import load_dotenv
+from google import genai
+from google.genai import errors as genai_errors
+
+from prompts import SUMMARIZE_PROMPT
+
+load_dotenv()
+
 USAGE = "Usage: python main.py <file_path>"
+MODEL_NAME = "gemini-flash-latest"
 
 
 def load_file(file_path):
@@ -70,20 +81,59 @@ def load_file(file_path):
 
 def summarize(text):
     """
-    Summarize the given text.
+    Summarize the given text using the Gemini API.
 
-    Currently a stub that returns a placeholder string.
-    TODO: Add API call here in Day 2
+    Day 2 change: replaces the Day 1 stub with a real call to the
+    Gemini API (model: gemini-flash-latest) via the google-genai SDK, using
+    prompts.SUMMARIZE_PROMPT formatted with the input text. Like
+    load_file(), this prints its own user-facing error message (never
+    a stack trace) and returns None on failure; callers only need to
+    check for None.
 
     Args:
         text (str): The text to summarize.
 
     Returns:
-        str: The summary (placeholder for now).
+        str | None: The summary text, or None on failure.
     """
-    # TODO: Add API call here in Day 2 (Anthropic SDK + prompts.SUMMARIZE_PROMPT).
-    # `text` is unused until the real summarization logic lands.
-    return "[Summary placeholder - API integration coming in Day 2]"
+    api_key = os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        print(
+            "❌ Error: GEMINI_API_KEY not set. Add it to your .env file.",
+            file=sys.stderr,
+        )
+        return None
+
+    prompt = SUMMARIZE_PROMPT.format(text=text)
+
+    try:
+        client = genai.Client(api_key=api_key)
+        response = client.models.generate_content(model=MODEL_NAME, contents=prompt)
+    except genai_errors.ClientError as e:
+        if e.code == 429:
+            print(
+                "❌ Error: Rate limit reached. Please wait a minute and try again.",
+                file=sys.stderr,
+            )
+        else:
+            print(f"❌ Error: Gemini API rejected the request: {e.message}", file=sys.stderr)
+        return None
+    except genai_errors.ServerError as e:
+        print(f"❌ Error: Gemini API server error: {e.message}", file=sys.stderr)
+        return None
+    except httpx.RequestError:
+        print(
+            "❌ Error: Could not reach the Gemini API. Check your network connection and try again.",
+            file=sys.stderr,
+        )
+        return None
+
+    summary = (response.text or "").strip()
+    if not summary:
+        print("❌ Error: Gemini API returned an empty response.", file=sys.stderr)
+        return None
+
+    return summary
 
 
 def main():
@@ -119,6 +169,8 @@ def main():
         sys.exit(1)
 
     summary = summarize(text)
+    if summary is None:
+        sys.exit(1)
 
     print()
     print("✅ Summary:")

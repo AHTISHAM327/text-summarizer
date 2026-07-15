@@ -1,4 +1,2 @@
-# No paid API dependencies yet
-# Week 1: Using Claude Pro chat (free) for prompt testing
-# Will add SDK here only when needed in later weeks
+google-genai>=0.1.0
 python-dotenv==1.0.0
