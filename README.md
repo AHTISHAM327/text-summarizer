@@ -22,6 +22,12 @@ python main.py filename.txt
 
 Point it at any plain text file and it prints a summary to the terminal.
 
+Add `--json` to get a single JSON object on stdout instead (summary, word count, char count, source file) for piping into other tools:
+
+```bash
+python main.py filename.txt --json
+```
+
 ## Example
 
 **Input** (`article.txt`):
@@ -50,9 +56,9 @@ The summary above is real output from the Gemini API using the tested prompt.
 - [x] Error handling (missing, empty, or invalid files)
 - [x] Prompt engineering (tested and versioned)
 - [x] API integration (Gemini API)
+- [x] JSON output
 
 **Coming**
-- [ ] JSON output
 - [ ] Batch processing (summarize multiple files at once)
 
 ## Notes
