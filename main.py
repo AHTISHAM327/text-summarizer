@@ -24,6 +24,7 @@ load_dotenv()
 
 USAGE = "Usage: python main.py <file_path> [--json]"
 MODEL_NAME = "gemini-flash-latest"
+LARGE_FILE_THRESHOLD = 50_000
 
 
 class ArgParser(argparse.ArgumentParser):
@@ -90,6 +91,16 @@ def load_file(file_path, quiet=False):
     if not text.strip():
         print(f"❌ Error: File is empty: {file_path}", file=sys.stderr)
         return None
+
+    # Warning only (not an error): still proceed, but let the user know
+    # before an unexpectedly slow/costly API call. Printed to stderr,
+    # ungated by `quiet`, so it never lands in --json's stdout output.
+    if len(text) > LARGE_FILE_THRESHOLD:
+        print(
+            f"⚠️  Warning: File is very large ({len(text):,} characters). "
+            "Summarization may be slow or cost more than usual.",
+            file=sys.stderr,
+        )
 
     if not quiet:
         print(f"📖 Loaded file: {file_path}")
@@ -163,9 +174,17 @@ def main():
     the result can be piped into other tools. Exits with status 1
     (after a usage hint) when arguments are missing or invalid.
     """
-    parser = ArgParser(add_help=False)
-    parser.add_argument("file_path")
-    parser.add_argument("--json", action="store_true")
+    parser = ArgParser(
+        description="Summarize a text file using the Gemini API.",
+        epilog="Example:\n  python main.py article.txt --json",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument("file_path", help="path to the UTF-8 text file to summarize")
+    parser.add_argument(
+        "--json",
+        action="store_true",
+        help="output a single JSON object on stdout instead of formatted text",
+    )
     args = parser.parse_args()
 
     # load_file() prints its own error message on failure, so only the
