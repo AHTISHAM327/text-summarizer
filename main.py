@@ -8,6 +8,8 @@ Exits with status 0 on success and 1 on any error, so the tool can be
 used safely in shell scripts and pipelines.
 """
 
+import argparse
+import json
 import os
 import sys
 
@@ -20,11 +22,22 @@ from prompts import SUMMARIZE_PROMPT
 
 load_dotenv()
 
-USAGE = "Usage: python main.py <file_path>"
+USAGE = "Usage: python main.py <file_path> [--json]"
 MODEL_NAME = "gemini-flash-latest"
 
 
-def load_file(file_path):
+class ArgParser(argparse.ArgumentParser):
+    """ArgumentParser that keeps this project's error conventions: a
+    clean one-line message on stderr (never a stack trace/usage dump)
+    and exit status 1."""
+
+    def error(self, message):
+        print(f"❌ Error: {message}", file=sys.stderr)
+        print(USAGE, file=sys.stderr)
+        sys.exit(1)
+
+
+def load_file(file_path, quiet=False):
     """
     Load text content from a file.
 
@@ -34,6 +47,9 @@ def load_file(file_path):
 
     Args:
         file_path (str): Path to the text file to load.
+        quiet (bool): When True, suppress the stdout progress line
+            (used for --json mode, where stdout must contain only the
+            JSON object). Error output is unaffected.
 
     Returns:
         str | None: The file's text content, or None on failure.
@@ -75,7 +91,8 @@ def load_file(file_path):
         print(f"❌ Error: File is empty: {file_path}", file=sys.stderr)
         return None
 
-    print(f"📖 Loaded file: {file_path}")
+    if not quiet:
+        print(f"📖 Loaded file: {file_path}")
     return text
 
 
@@ -140,31 +157,20 @@ def main():
     """
     Entry point for the command-line tool.
 
-    Expects exactly one argument: the path of the file to summarize.
-    Loads the file, generates a summary, and prints it. Exits with
-    status 1 (after a usage hint) when arguments are missing or invalid.
+    Expects exactly one positional argument: the path of the file to
+    summarize. An optional --json flag switches output to a single
+    JSON object on stdout (with all emoji/status lines suppressed) so
+    the result can be piped into other tools. Exits with status 1
+    (after a usage hint) when arguments are missing or invalid.
     """
-    # sys.argv[0] is the script name itself, so the file path is argv[1].
-    if len(sys.argv) < 2:
-        print("❌ Error: No file path provided.", file=sys.stderr)
-        print(USAGE, file=sys.stderr)
-        sys.exit(1)
-
-    # Batch processing isn't supported yet, so reject extra arguments
-    # loudly instead of silently ignoring all but the first file.
-    if len(sys.argv) > 2:
-        print(
-            f"❌ Error: Expected exactly one file path (got {len(sys.argv) - 1} arguments).",
-            file=sys.stderr,
-        )
-        print(USAGE, file=sys.stderr)
-        sys.exit(1)
-
-    file_path = sys.argv[1]
+    parser = ArgParser(add_help=False)
+    parser.add_argument("file_path")
+    parser.add_argument("--json", action="store_true")
+    args = parser.parse_args()
 
     # load_file() prints its own error message on failure, so only the
     # non-zero exit code is needed here.
-    text = load_file(file_path)
+    text = load_file(args.file_path, quiet=args.json)
     if text is None:
         sys.exit(1)
 
@@ -172,9 +178,18 @@ def main():
     if summary is None:
         sys.exit(1)
 
-    print()
-    print("✅ Summary:")
-    print(summary)
+    if args.json:
+        output = {
+            "summary": summary,
+            "word_count": len(summary.split()),
+            "char_count": len(summary),
+            "source_file": args.file_path,
+        }
+        print(json.dumps(output, indent=2))
+    else:
+        print()
+        print("✅ Summary:")
+        print(summary)
 
 
 if __name__ == "__main__":
