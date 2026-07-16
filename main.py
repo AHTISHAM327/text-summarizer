@@ -3,6 +3,7 @@ Command-line text summarizer.
 
 Usage:
     python main.py <file_path>
+    python main.py --batch <directory>
 
 Exits with status 0 on success and 1 on any error, so the tool can be
 used safely in shell scripts and pipelines.
@@ -22,7 +23,7 @@ from prompts import SUMMARIZE_PROMPT
 
 load_dotenv()
 
-USAGE = "Usage: python main.py <file_path> [--json]"
+USAGE = "Usage: python main.py <file_path> [--json] | python main.py --batch <directory>"
 MODEL_NAME = "gemini-flash-latest"
 LARGE_FILE_THRESHOLD = 50_000
 
@@ -164,28 +165,182 @@ def summarize(text):
     return summary
 
 
+def summarize_file(file_path):
+    """Load a text file and summarize it, returning a result dict.
+
+    Composes load_file() and summarize(). Both of those print their own
+    user-facing error messages on failure, so this function stays quiet
+    and just signals failure with None.
+
+    Args:
+        file_path (str): Path to the UTF-8 text file to summarize.
+
+    Returns:
+        dict | None: On success, a dict with the keys "summary",
+            "word_count", "char_count", and "source_file". None on
+            any failure (the failure has already been reported on
+            stderr by load_file() or summarize()).
+
+    Raises:
+        Nothing: all failure modes are handled internally and
+            reported as None.
+    """
+    text = load_file(file_path, quiet=True)
+    if text is None:
+        return None
+
+    summary = summarize(text)
+    if summary is None:
+        return None
+
+    return {
+        "summary": summary,
+        "word_count": len(summary.split()),
+        "char_count": len(summary),
+        "source_file": file_path,
+    }
+
+
+def batch_summarize_directory(directory_path, on_progress=None):
+    """Summarize every top-level .txt file in a directory.
+
+    Discovers .txt files directly inside directory_path (non-recursive),
+    sorts them alphabetically by filename for predictable output order,
+    and runs summarize_file() on each. Files that fail are still
+    included in the results so the output array always has one entry
+    per discovered file. This function does not print; the caller is
+    responsible for presenting results and progress.
+
+    Args:
+        directory_path (str): Path to the directory to scan for .txt
+            files.
+        on_progress (callable | None): Optional callback invoked before
+            each file is processed, as on_progress(index, total,
+            filename) with a 1-based index. Used by the CLI to report
+            progress without this function printing anything itself.
+
+    Returns:
+        list[dict]: One dict per .txt file, in alphabetical filename
+            order. Successful files use the summarize_file() result
+            shape; failed files use {"source_file": <path>,
+            "error": "failed", "summary": None}.
+
+    Raises:
+        OSError: If directory_path does not exist, is not a directory,
+            or cannot be read (includes FileNotFoundError,
+            NotADirectoryError, and PermissionError).
+    """
+    with os.scandir(directory_path) as entries:
+        txt_files = sorted(
+            entry.name
+            for entry in entries
+            if entry.is_file() and entry.name.endswith(".txt")
+        )
+
+    results = []
+    for index, filename in enumerate(txt_files, start=1):
+        if on_progress is not None:
+            on_progress(index, len(txt_files), filename)
+
+        file_path = os.path.join(directory_path, filename)
+        result = summarize_file(file_path)
+        if result is None:
+            result = {"source_file": file_path, "error": "failed", "summary": None}
+        results.append(result)
+
+    return results
+
+
+def run_batch(directory_path):
+    """Run batch mode: summarize a directory and print a JSON array.
+
+    Prints progress and status lines to stderr and the full results
+    array as JSON to stdout, so stdout stays machine-readable.
+
+    Args:
+        directory_path (str): Directory containing the .txt files to
+            summarize.
+
+    Returns:
+        int: Process exit code — 0 if every file succeeded, 1 if any
+            file failed or the directory could not be read.
+
+    Raises:
+        Nothing: directory read errors are caught and reported as a
+            clean stderr message per project convention.
+    """
+
+    def report_progress(index, total, filename):
+        print(f"⚙️ Processing {index}/{total}: {filename}", file=sys.stderr)
+
+    try:
+        results = batch_summarize_directory(directory_path, on_progress=report_progress)
+    except OSError as e:
+        print(
+            f"❌ Error: Could not read directory {directory_path}: {e.strerror or e}",
+            file=sys.stderr,
+        )
+        return 1
+
+    if not results:
+        print(f"❌ Error: No .txt files found in: {directory_path}", file=sys.stderr)
+        return 1
+
+    print(json.dumps(results, indent=2))
+
+    failures = sum(1 for r in results if r.get("error") == "failed")
+    if failures:
+        print(
+            f"❌ Batch finished with errors: {failures}/{len(results)} files failed.",
+            file=sys.stderr,
+        )
+        return 1
+
+    print(f"✅ Batch complete: {len(results)}/{len(results)} files succeeded.", file=sys.stderr)
+    return 0
+
+
 def main():
     """
     Entry point for the command-line tool.
 
-    Expects exactly one positional argument: the path of the file to
-    summarize. An optional --json flag switches output to a single
-    JSON object on stdout (with all emoji/status lines suppressed) so
-    the result can be piped into other tools. Exits with status 1
+    Accepts either a positional file path (single-file mode) or
+    --batch <directory> (batch mode); the two are mutually exclusive.
+    In single-file mode an optional --json flag switches output to a
+    single JSON object on stdout (with all emoji/status lines
+    suppressed) so the result can be piped into other tools. Batch
+    mode always prints a JSON array on stdout. Exits with status 1
     (after a usage hint) when arguments are missing or invalid.
     """
     parser = ArgParser(
         description="Summarize a text file using the Gemini API.",
-        epilog="Example:\n  python main.py article.txt --json",
+        epilog=(
+            "Examples:\n"
+            "  python main.py article.txt --json\n"
+            "  python main.py --batch ./articles"
+        ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    parser.add_argument("file_path", help="path to the UTF-8 text file to summarize")
+    input_group = parser.add_mutually_exclusive_group(required=True)
+    input_group.add_argument(
+        "file_path",
+        nargs="?",
+        help="path to the UTF-8 text file to summarize",
+    )
+    input_group.add_argument(
+        "--batch",
+        metavar="DIRECTORY",
+        help="summarize every top-level .txt file in DIRECTORY and print a JSON array",
+    )
     parser.add_argument(
         "--json",
         action="store_true",
         help="output a single JSON object on stdout instead of formatted text",
     )
     args = parser.parse_args()
+
+    if args.batch:
+        sys.exit(run_batch(args.batch))
 
     # load_file() prints its own error message on failure, so only the
     # non-zero exit code is needed here.
