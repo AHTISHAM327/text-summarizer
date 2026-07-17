@@ -24,7 +24,7 @@ from prompts import get_summarize_prompt
 load_dotenv()
 
 USAGE = "Usage: python main.py --file <file_path> [--json] | python main.py --batch <directory>"
-MODEL_NAME = "gemini-flash-latest"
+MODEL_NAME = "gemini-flash-lite-latest"
 LARGE_FILE_THRESHOLD = 50_000
 
 
@@ -113,7 +113,7 @@ def summarize(text, length="medium"):
     Summarize the given text using the Gemini API.
 
     Day 2 change: replaces the Day 1 stub with a real call to the
-    Gemini API (model: gemini-flash-latest) via the google-genai SDK, using
+    Gemini API (model: gemini-flash-lite-latest) via the google-genai SDK, using
     a prompt built by prompts.get_summarize_prompt(). Like
     load_file(), this prints its own user-facing error message (never
     a stack trace) and returns None on failure; callers only need to

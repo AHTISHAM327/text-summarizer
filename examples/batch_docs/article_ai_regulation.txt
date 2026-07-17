@@ -1,0 +1,31 @@
+European Parliament Passes Landmark AI Liability Directive
+
+The European Parliament voted 412 to 189 on Wednesday to pass the AI Liability
+Directive, a landmark piece of legislation that establishes a legal framework for
+assigning fault and awarding damages in cases where artificial intelligence systems
+cause harm. The directive, which will now proceed to formal adoption by the Council
+of the EU before taking effect, is expected to reshape how companies develop, deploy,
+and insure AI products across the bloc.
+
+Under the directive, victims of AI-related harm — including discrimination in hiring,
+biased credit decisions, or physical injury caused by an autonomous system — will be
+able to seek compensation through national courts without needing to prove exactly
+how the AI system made a particular decision. This "presumption of causality" clause
+was the most contentious provision during three years of legislative negotiations, with
+technology industry groups arguing it would make AI development in Europe unworkable
+and consumer rights advocates arguing it was essential given the opacity of many
+modern systems.
+
+The directive applies to a broad range of AI applications but imposes the strictest
+obligations on "high-risk" systems as defined by the parallel EU AI Act, including
+systems used in critical infrastructure, law enforcement, education, and employment.
+Providers of high-risk AI must maintain detailed technical documentation and logs
+sufficient to support litigation, and must disclose this evidence to courts upon request.
+
+Tech companies including several major US platform providers have warned that compliance
+costs could run into hundreds of millions of euros annually and that some products may
+be withdrawn from the European market. EU officials have dismissed these warnings as
+lobbying pressure, pointing to similar predictions that did not materialize after
+the General Data Protection Regulation took effect in 2018.
+
+Member states will have 24 months to transpose the directive into national law.

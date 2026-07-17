@@ -1,0 +1,37 @@
+Abstract: Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks
+
+Large language models (LLMs) have demonstrated remarkable capabilities across a wide
+range of natural language processing tasks. However, their knowledge is frozen at
+training time and they are prone to generating factually incorrect statements —
+a phenomenon commonly referred to as "hallucination" — particularly on tasks that
+require specific, up-to-date, or domain-specific knowledge. Retrieval-Augmented
+Generation (RAG) addresses these limitations by coupling a parametric language model
+with a non-parametric memory in the form of a dense vector store.
+
+In this paper, we present a comprehensive empirical study of RAG systems across five
+knowledge-intensive benchmarks: Natural Questions, TriviaQA, WebQuestions, CuratedTREC,
+and a novel enterprise document QA dataset we introduce. We evaluate three retrieval
+strategies — BM25 sparse retrieval, dense passage retrieval (DPR), and a hybrid
+re-ranking approach — and examine how retrieval quality affects downstream generation
+quality as measured by exact match, F1, and factual consistency scores.
+
+Our key findings are as follows. First, retrieval quality is the dominant factor in
+end-to-end RAG performance: improving retrieval recall from 60% to 80% yields a larger
+accuracy gain than upgrading the generator from a 7B to a 13B parameter model. Second,
+the hybrid retrieval approach outperforms either sparse or dense retrieval alone across
+all five benchmarks, with an average F1 improvement of 4.3 points over the next-best
+single method. Third, chunk size is a critical but often overlooked hyperparameter:
+128-token chunks consistently outperform 512-token chunks on precision-sensitive tasks,
+while longer chunks are preferred for tasks requiring broader context.
+
+We also introduce a new metric, Retrieval-Attribution Score (RAS), which measures the
+degree to which model outputs can be traced back to retrieved passages. High-RAS models
+are significantly less likely to produce hallucinated facts, suggesting that attribution
+tracking is a practical proxy for factual reliability. We release our benchmark datasets,
+evaluation code, and model checkpoints to support reproducibility and further research.
+
+These results have practical implications for practitioners deploying RAG systems in
+production. We recommend a retrieval-first optimization strategy, careful tuning of
+chunk size to the task domain, and integration of attribution tracking into evaluation
+pipelines. Future work will examine the interaction between retrieval strategy and
+instruction tuning, and explore real-time retrieval from continuously updated sources.

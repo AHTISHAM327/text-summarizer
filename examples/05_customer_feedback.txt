@@ -1,0 +1,58 @@
+Customer Support Ticket #48291 — Monthly Feedback Digest (July 2026)
+
+The following is a compiled summary of customer feedback received via the in-app
+survey and support channel during the month of July 2026. Total responses: 143.
+
+POSITIVE FEEDBACK (82 responses):
+
+"The new bulk export is a game changer. I used to spend an hour manually copying
+data every week. Now it takes 30 seconds." — Enterprise user, Healthcare sector
+
+"Onboarding has gotten so much smoother. My new team member was productive on day one
+without needing any help from me." — SMB user, Marketing agency
+
+"Love the keyboard shortcuts. Small thing but it makes the whole product feel faster."
+— Power user, SaaS startup
+
+"Customer support response time has improved noticeably. Got a reply in under two hours."
+— Mid-market user, E-commerce
+
+"The dashboard redesign is clean and intuitive. Finally I can see everything I need
+without scrolling." — Enterprise user, Financial services
+
+NEUTRAL / MIXED FEEDBACK (31 responses):
+
+"The export feature is great but I wish it supported CSV in addition to JSON and Excel."
+— SMB user
+
+"Performance is better than it was six months ago but still noticeably slower when I
+have more than 500 records loaded." — Enterprise user
+
+"The help documentation is thorough but hard to search. I usually find it faster
+to just ask support." — Mid-market user
+
+"I like where the product is going but the mobile experience still feels like an
+afterthought compared to desktop." — SMB user, 3 similar comments received
+
+NEGATIVE FEEDBACK / COMPLAINTS (30 responses):
+
+"The API rate limits are too restrictive for our use case. We're hitting the ceiling
+daily and it's creating real workflow problems for our team." — Enterprise user,
+this exact issue mentioned by 11 separate respondents.
+
+"Since the last update, the CSV import sometimes silently drops rows without any
+error message. I only noticed because my record count didn't match." — Mid-market user
+
+"I've submitted two feature requests in the past year via the feedback form and heard
+nothing back. Not even an acknowledgment. It feels like the feedback goes nowhere."
+— SMB user, sentiment echoed in 8 other responses
+
+"The pricing increase last quarter wasn't communicated well. I found out on my invoice."
+— SMB user, 4 similar complaints
+
+MOST REQUESTED FEATURES (across all feedback):
+1. API rate limit controls or higher caps (11 mentions)
+2. CSV export option (7 mentions)
+3. Mobile app improvements (6 mentions)
+4. Bulk tagging / labeling (5 mentions)
+5. Feedback loop / status updates on submitted requests (8 mentions)

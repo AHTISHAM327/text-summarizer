@@ -1,0 +1,34 @@
+Support Ticket #48619
+Priority: Medium
+Account: Brightleaf Marketing (SMB, 12 seats)
+Submitted by: Jessica Park, Operations Manager
+Date: July 12, 2026
+
+Issue Description:
+We discovered a data integrity issue with the CSV import feature. When importing
+large CSV files (we tested with files of 500+ rows), some rows are silently dropped
+without any error message or warning. The import completes successfully with a green
+checkmark and a "Import complete" message, but the record count in the system does
+not match the row count in the file.
+
+Steps to reproduce:
+1. Prepare a CSV file with 600 rows following the documented column format.
+2. Navigate to Settings > Data Import > CSV Upload.
+3. Upload the file and wait for the "Import complete" confirmation.
+4. Count records in the system.
+5. Observed: 547 records imported. Expected: 600 records.
+
+We have tested this with 5 different CSV files ranging from 480 to 720 rows.
+In every case, between 8-12% of rows are dropped. The dropped rows do not appear
+to follow any obvious pattern — they are scattered throughout the file, not
+consistently at the beginning or end.
+
+Impact: We cannot trust our data. We are currently manually cross-checking every
+import against the source file, which is taking our team 2-3 hours per week.
+
+Requested resolution:
+1. Fix the bug so all rows are imported.
+2. As a minimum interim fix, add a visible warning if imported row count does not
+   match source row count, so users are at least aware the data is incomplete.
+3. Let us know if there is a safe workaround in the meantime (import in smaller
+   batches? use a different format?).

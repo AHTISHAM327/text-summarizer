@@ -1,0 +1,37 @@
+Remote Work Productivity: What Four Years of Data Actually Show
+
+Four years after the mass shift to remote work that began during the pandemic, the
+empirical picture is considerably more complicated than the confident predictions made
+in either direction during 2020 and 2021. A new meta-analysis published in the Journal
+of Applied Psychology synthesizes results from 87 studies involving more than 230,000
+workers across 14 countries and concludes that the productivity effect of remote work
+is highly context-dependent, with outcomes varying significantly by job type, individual
+personality, household composition, and employer support structures.
+
+For knowledge workers doing primarily individual, focused work — software engineering,
+writing, data analysis — the analysis finds a small but consistent productivity gain
+of approximately 5 to 8 percent when working remotely, attributed mainly to the
+elimination of commute time, reduced office interruptions, and greater autonomy over
+working conditions. These gains are largest among workers with dedicated home office
+space and childcare arrangements, and smallest among those sharing living spaces or
+lacking separation between work and personal environments.
+
+For roles requiring high levels of real-time collaboration — product design, sales,
+management — the results are reversed. Remote workers in these roles show productivity
+declines averaging 9 to 13 percent, driven primarily by communication latency, reduced
+informal knowledge transfer, and slower onboarding of new team members. Video conferencing
+has not fully replicated the spontaneous, low-friction interaction of shared physical space.
+
+The analysis also highlights a divergence between short-run and long-run effects.
+Many studies that measured productivity in the first six months of remote work captured
+a temporary output boost driven by workers drawing down on social capital and shared
+context built during prior in-office periods. Studies that tracked workers for more
+than 18 months found that this initial boost partially reversed as collaborative
+capacity declined.
+
+The authors caution against blanket return-to-office mandates, noting that forcing
+high-performing remote workers back to the office full-time is associated with elevated
+attrition rates, particularly among senior individual contributors who have the labor
+market options to find more flexible employers. They recommend a differentiated approach
+in which remote, hybrid, and in-office arrangements are matched to role requirements
+rather than applied uniformly across an organization.

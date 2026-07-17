@@ -7,21 +7,22 @@
 Takes any `.txt` file (or a folder of `.txt` files) and returns a clean, concise summary using Google Gemini. Supports three output lengths and structured JSON output for pipeline integration.
 
 **Built for:**
+
 - Summarizing research papers, reports, and meeting notes
 - Batch-processing folders of articles, customer feedback, or support tickets
 - Integrating into existing scripts and pipelines via `--json` and clean exit codes
 
 ## Features
 
-| Feature | Description |
-|---------|-------------|
-| Single file mode | `--file path/to/doc.txt` |
-| Batch mode | `--batch path/to/folder/` — processes every top-level `.txt` file |
-| Length control | `--length short / medium / long` |
-| JSON output | `--json` returns a structured object with `word_count`, `char_count` |
-| Error-safe | Clean one-line messages for missing files, empty inputs, API errors — never a stack trace |
-| Exit codes | `0` on success, `1` on any failure (pipeline-friendly) |
-| Tested prompts | The summarization prompt was iterated version-against-version and the winner committed (see `test_prompts.md`) |
+| Feature          | Description                                                                                                    |
+| ---------------- | -------------------------------------------------------------------------------------------------------------- |
+| Single file mode | `--file path/to/doc.txt`                                                                                       |
+| Batch mode       | `--batch path/to/folder/` — processes every top-level `.txt` file                                              |
+| Length control   | `--length short / medium / long`                                                                               |
+| JSON output      | `--json` returns a structured object with `word_count`, `char_count`                                           |
+| Error-safe       | Clean one-line messages for missing files, empty inputs, API errors — never a stack trace                      |
+| Exit codes       | `0` on success, `1` on any failure (pipeline-friendly)                                                         |
+| Tested prompts   | The summarization prompt was iterated version-against-version and the winner committed (see `test_prompts.md`) |
 
 ## Setup
 
@@ -48,6 +49,7 @@ python3 main.py --file sample.txt
 ## Usage
 
 **Single file:**
+
 ```bash
 python3 main.py --file path/to/document.txt
 python3 main.py --file report.txt --length short
@@ -55,6 +57,7 @@ python3 main.py --file report.txt --json
 ```
 
 **Batch mode (entire folder):**
+
 ```bash
 python3 main.py --batch ./documents/
 python3 main.py --batch ./documents/ --length short
@@ -64,12 +67,12 @@ Batch mode always prints a JSON array to stdout (one entry per file, in alphabet
 
 **Flags:**
 
-| Flag | Values | Default | Description |
-|------|--------|---------|-------------|
-| `--file` | file path | — | Single file to summarize |
-| `--batch` | directory path | — | Process all top-level `.txt` files in a folder |
-| `--length` | `short`, `medium`, `long` | `medium` | Summary length |
-| `--json` | — | off | Single-file mode: output a JSON object instead of formatted text |
+| Flag       | Values                    | Default  | Description                                                      |
+| ---------- | ------------------------- | -------- | ---------------------------------------------------------------- |
+| `--file`   | file path                 | —        | Single file to summarize                                         |
+| `--batch`  | directory path            | —        | Process all top-level `.txt` files in a folder                   |
+| `--length` | `short`, `medium`, `long` | `medium` | Summary length                                                   |
+| `--json`   | —                         | off      | Single-file mode: output a JSON object instead of formatted text |
 
 `--file` and `--batch` are mutually exclusive; exactly one is required.
 
@@ -80,6 +83,7 @@ Batch mode always prints a JSON array to stdout (one entry per file, in alphabet
 > The city council met on Tuesday to discuss the proposed downtown redevelopment plan. The plan includes new bike lanes, expanded green space, and mixed-use housing. Several residents voiced concerns about parking availability and construction noise. A final vote is scheduled for next month.
 
 **`python3 main.py --file article.txt`:**
+
 ```
 📖 Loaded file: article.txt
 
@@ -90,6 +94,7 @@ parking and noise. A final vote is scheduled for next month.
 ```
 
 **`python3 main.py --file article.txt --json`:**
+
 ```json
 {
   "summary": "The city council reviewed a downtown redevelopment plan featuring bike lanes, green space, and mixed-use housing, while addressing resident concerns about parking and noise. A final vote is scheduled for next month.",
@@ -113,7 +118,7 @@ Built for scripts and pipelines, so failures are predictable:
 
 ## Tech Stack
 
-- **LLM:** Google Gemini (`gemini-flash-latest`, free tier via the `google-genai` SDK)
+- **LLM:** Google Gemini (`gemini-flash-lite-latest`, free tier via the `google-genai` SDK)
 - **Prompt design:** Versioned, manually tested prompt templates in `prompts.py`, separated from logic — test rounds logged in `test_prompts.md`
 - **Error handling:** All file and API errors caught; stack traces never reach the user
 

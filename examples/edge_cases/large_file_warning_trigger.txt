@@ -1,0 +1,643 @@
+Section 1.1
+
+Artificial intelligence has transformed nearly every sector of the global economy over the past decade. From healthcare diagnostics to financial modeling, from supply chain optimization to creative content generation, the technology has moved rapidly from research laboratories into production systems that affect billions of people daily.
+
+Section 1.2
+
+Despite these challenges, optimism about the potential of AI to address humanity's most pressing problems remains widespread. AI-assisted drug discovery has already accelerated the identification of potential treatments for diseases that have resisted conventional approaches.
+
+Section 1.3
+
+One of the most consequential questions facing society is how to govern these systems. Regulation has lagged behind deployment, and the international coordination needed to establish consistent global standards has proven elusive. Different jurisdictions are pursuing very different approaches.
+
+Section 1.4
+
+The labor market implications of widespread AI adoption are deeply contested. Some economists predict substantial displacement of white-collar work, particularly in roles involving routine information processing, document analysis, customer service, and certain aspects of legal and financial work.
+
+Section 1.5
+
+The development of large language models in particular has accelerated this transformation. These systems, trained on vast corpora of text, are capable of generating fluent prose, writing code, summarizing complex documents, translating between languages, and answering questions across an enormous range of domains.
+
+Section 1.6
+
+Privacy is another area of growing concern. Modern AI systems raise fundamental questions about consent, data ownership, and the appropriate boundaries of surveillance. Recommendation systems optimize for engagement metrics in ways that can amplify polarization and misinformation.
+
+Section 1.7
+
+The environmental footprint of AI is also increasingly scrutinized. Training large foundation models requires enormous amounts of compute, which translates into substantial energy consumption and carbon emissions. Data centers supporting AI inference at scale are significant consumers of electricity and water.
+
+Section 1.8
+
+The governance question ultimately comes down to values: who decides what AI systems should optimize for, whose interests they should serve, and what harms are acceptable in pursuit of what benefits. These are not technical questions but political and ethical ones.
+
+Section 2.1
+
+The governance question ultimately comes down to values: who decides what AI systems should optimize for, whose interests they should serve, and what harms are acceptable in pursuit of what benefits. These are not technical questions but political and ethical ones.
+
+Section 2.2
+
+The labor market implications of widespread AI adoption are deeply contested. Some economists predict substantial displacement of white-collar work, particularly in roles involving routine information processing, document analysis, customer service, and certain aspects of legal and financial work.
+
+Section 2.3
+
+The development of large language models in particular has accelerated this transformation. These systems, trained on vast corpora of text, are capable of generating fluent prose, writing code, summarizing complex documents, translating between languages, and answering questions across an enormous range of domains.
+
+Section 2.4
+
+One of the most consequential questions facing society is how to govern these systems. Regulation has lagged behind deployment, and the international coordination needed to establish consistent global standards has proven elusive. Different jurisdictions are pursuing very different approaches.
+
+Section 2.5
+
+Despite these challenges, optimism about the potential of AI to address humanity's most pressing problems remains widespread. AI-assisted drug discovery has already accelerated the identification of potential treatments for diseases that have resisted conventional approaches.
+
+Section 2.6
+
+Artificial intelligence has transformed nearly every sector of the global economy over the past decade. From healthcare diagnostics to financial modeling, from supply chain optimization to creative content generation, the technology has moved rapidly from research laboratories into production systems that affect billions of people daily.
+
+Section 2.7
+
+Privacy is another area of growing concern. Modern AI systems raise fundamental questions about consent, data ownership, and the appropriate boundaries of surveillance. Recommendation systems optimize for engagement metrics in ways that can amplify polarization and misinformation.
+
+Section 2.8
+
+The environmental footprint of AI is also increasingly scrutinized. Training large foundation models requires enormous amounts of compute, which translates into substantial energy consumption and carbon emissions. Data centers supporting AI inference at scale are significant consumers of electricity and water.
+
+Section 3.1
+
+Privacy is another area of growing concern. Modern AI systems raise fundamental questions about consent, data ownership, and the appropriate boundaries of surveillance. Recommendation systems optimize for engagement metrics in ways that can amplify polarization and misinformation.
+
+Section 3.2
+
+Despite these challenges, optimism about the potential of AI to address humanity's most pressing problems remains widespread. AI-assisted drug discovery has already accelerated the identification of potential treatments for diseases that have resisted conventional approaches.
+
+Section 3.3
+
+The development of large language models in particular has accelerated this transformation. These systems, trained on vast corpora of text, are capable of generating fluent prose, writing code, summarizing complex documents, translating between languages, and answering questions across an enormous range of domains.
+
+Section 3.4
+
+The labor market implications of widespread AI adoption are deeply contested. Some economists predict substantial displacement of white-collar work, particularly in roles involving routine information processing, document analysis, customer service, and certain aspects of legal and financial work.
+
+Section 3.5
+
+Artificial intelligence has transformed nearly every sector of the global economy over the past decade. From healthcare diagnostics to financial modeling, from supply chain optimization to creative content generation, the technology has moved rapidly from research laboratories into production systems that affect billions of people daily.
+
+Section 3.6
+
+The environmental footprint of AI is also increasingly scrutinized. Training large foundation models requires enormous amounts of compute, which translates into substantial energy consumption and carbon emissions. Data centers supporting AI inference at scale are significant consumers of electricity and water.
+
+Section 3.7
+
+The governance question ultimately comes down to values: who decides what AI systems should optimize for, whose interests they should serve, and what harms are acceptable in pursuit of what benefits. These are not technical questions but political and ethical ones.
+
+Section 3.8
+
+One of the most consequential questions facing society is how to govern these systems. Regulation has lagged behind deployment, and the international coordination needed to establish consistent global standards has proven elusive. Different jurisdictions are pursuing very different approaches.
+
+Section 4.1
+
+The governance question ultimately comes down to values: who decides what AI systems should optimize for, whose interests they should serve, and what harms are acceptable in pursuit of what benefits. These are not technical questions but political and ethical ones.
+
+Section 4.2
+
+Privacy is another area of growing concern. Modern AI systems raise fundamental questions about consent, data ownership, and the appropriate boundaries of surveillance. Recommendation systems optimize for engagement metrics in ways that can amplify polarization and misinformation.
+
+Section 4.3
+
+One of the most consequential questions facing society is how to govern these systems. Regulation has lagged behind deployment, and the international coordination needed to establish consistent global standards has proven elusive. Different jurisdictions are pursuing very different approaches.
+
+Section 4.4
+
+The environmental footprint of AI is also increasingly scrutinized. Training large foundation models requires enormous amounts of compute, which translates into substantial energy consumption and carbon emissions. Data centers supporting AI inference at scale are significant consumers of electricity and water.
+
+Section 4.5
+
+The labor market implications of widespread AI adoption are deeply contested. Some economists predict substantial displacement of white-collar work, particularly in roles involving routine information processing, document analysis, customer service, and certain aspects of legal and financial work.
+
+Section 4.6
+
+The development of large language models in particular has accelerated this transformation. These systems, trained on vast corpora of text, are capable of generating fluent prose, writing code, summarizing complex documents, translating between languages, and answering questions across an enormous range of domains.
+
+Section 4.7
+
+Artificial intelligence has transformed nearly every sector of the global economy over the past decade. From healthcare diagnostics to financial modeling, from supply chain optimization to creative content generation, the technology has moved rapidly from research laboratories into production systems that affect billions of people daily.
+
+Section 4.8
+
+Despite these challenges, optimism about the potential of AI to address humanity's most pressing problems remains widespread. AI-assisted drug discovery has already accelerated the identification of potential treatments for diseases that have resisted conventional approaches.
+
+Section 5.1
+
+The environmental footprint of AI is also increasingly scrutinized. Training large foundation models requires enormous amounts of compute, which translates into substantial energy consumption and carbon emissions. Data centers supporting AI inference at scale are significant consumers of electricity and water.
+
+Section 5.2
+
+One of the most consequential questions facing society is how to govern these systems. Regulation has lagged behind deployment, and the international coordination needed to establish consistent global standards has proven elusive. Different jurisdictions are pursuing very different approaches.
+
+Section 5.3
+
+Privacy is another area of growing concern. Modern AI systems raise fundamental questions about consent, data ownership, and the appropriate boundaries of surveillance. Recommendation systems optimize for engagement metrics in ways that can amplify polarization and misinformation.
+
+Section 5.4
+
+The development of large language models in particular has accelerated this transformation. These systems, trained on vast corpora of text, are capable of generating fluent prose, writing code, summarizing complex documents, translating between languages, and answering questions across an enormous range of domains.
+
+Section 5.5
+
+Artificial intelligence has transformed nearly every sector of the global economy over the past decade. From healthcare diagnostics to financial modeling, from supply chain optimization to creative content generation, the technology has moved rapidly from research laboratories into production systems that affect billions of people daily.
+
+Section 5.6
+
+The labor market implications of widespread AI adoption are deeply contested. Some economists predict substantial displacement of white-collar work, particularly in roles involving routine information processing, document analysis, customer service, and certain aspects of legal and financial work.
+
+Section 5.7
+
+The governance question ultimately comes down to values: who decides what AI systems should optimize for, whose interests they should serve, and what harms are acceptable in pursuit of what benefits. These are not technical questions but political and ethical ones.
+
+Section 5.8
+
+Despite these challenges, optimism about the potential of AI to address humanity's most pressing problems remains widespread. AI-assisted drug discovery has already accelerated the identification of potential treatments for diseases that have resisted conventional approaches.
+
+Section 6.1
+
+Despite these challenges, optimism about the potential of AI to address humanity's most pressing problems remains widespread. AI-assisted drug discovery has already accelerated the identification of potential treatments for diseases that have resisted conventional approaches.
+
+Section 6.2
+
+Artificial intelligence has transformed nearly every sector of the global economy over the past decade. From healthcare diagnostics to financial modeling, from supply chain optimization to creative content generation, the technology has moved rapidly from research laboratories into production systems that affect billions of people daily.
+
+Section 6.3
+
+The labor market implications of widespread AI adoption are deeply contested. Some economists predict substantial displacement of white-collar work, particularly in roles involving routine information processing, document analysis, customer service, and certain aspects of legal and financial work.
+
+Section 6.4
+
+The development of large language models in particular has accelerated this transformation. These systems, trained on vast corpora of text, are capable of generating fluent prose, writing code, summarizing complex documents, translating between languages, and answering questions across an enormous range of domains.
+
+Section 6.5
+
+One of the most consequential questions facing society is how to govern these systems. Regulation has lagged behind deployment, and the international coordination needed to establish consistent global standards has proven elusive. Different jurisdictions are pursuing very different approaches.
+
+Section 6.6
+
+Privacy is another area of growing concern. Modern AI systems raise fundamental questions about consent, data ownership, and the appropriate boundaries of surveillance. Recommendation systems optimize for engagement metrics in ways that can amplify polarization and misinformation.
+
+Section 6.7
+
+The governance question ultimately comes down to values: who decides what AI systems should optimize for, whose interests they should serve, and what harms are acceptable in pursuit of what benefits. These are not technical questions but political and ethical ones.
+
+Section 6.8
+
+The environmental footprint of AI is also increasingly scrutinized. Training large foundation models requires enormous amounts of compute, which translates into substantial energy consumption and carbon emissions. Data centers supporting AI inference at scale are significant consumers of electricity and water.
+
+Section 7.1
+
+The labor market implications of widespread AI adoption are deeply contested. Some economists predict substantial displacement of white-collar work, particularly in roles involving routine information processing, document analysis, customer service, and certain aspects of legal and financial work.
+
+Section 7.2
+
+Artificial intelligence has transformed nearly every sector of the global economy over the past decade. From healthcare diagnostics to financial modeling, from supply chain optimization to creative content generation, the technology has moved rapidly from research laboratories into production systems that affect billions of people daily.
+
+Section 7.3
+
+The development of large language models in particular has accelerated this transformation. These systems, trained on vast corpora of text, are capable of generating fluent prose, writing code, summarizing complex documents, translating between languages, and answering questions across an enormous range of domains.
+
+Section 7.4
+
+Despite these challenges, optimism about the potential of AI to address humanity's most pressing problems remains widespread. AI-assisted drug discovery has already accelerated the identification of potential treatments for diseases that have resisted conventional approaches.
+
+Section 7.5
+
+Privacy is another area of growing concern. Modern AI systems raise fundamental questions about consent, data ownership, and the appropriate boundaries of surveillance. Recommendation systems optimize for engagement metrics in ways that can amplify polarization and misinformation.
+
+Section 7.6
+
+The environmental footprint of AI is also increasingly scrutinized. Training large foundation models requires enormous amounts of compute, which translates into substantial energy consumption and carbon emissions. Data centers supporting AI inference at scale are significant consumers of electricity and water.
+
+Section 7.7
+
+The governance question ultimately comes down to values: who decides what AI systems should optimize for, whose interests they should serve, and what harms are acceptable in pursuit of what benefits. These are not technical questions but political and ethical ones.
+
+Section 7.8
+
+One of the most consequential questions facing society is how to govern these systems. Regulation has lagged behind deployment, and the international coordination needed to establish consistent global standards has proven elusive. Different jurisdictions are pursuing very different approaches.
+
+Section 8.1
+
+The governance question ultimately comes down to values: who decides what AI systems should optimize for, whose interests they should serve, and what harms are acceptable in pursuit of what benefits. These are not technical questions but political and ethical ones.
+
+Section 8.2
+
+Privacy is another area of growing concern. Modern AI systems raise fundamental questions about consent, data ownership, and the appropriate boundaries of surveillance. Recommendation systems optimize for engagement metrics in ways that can amplify polarization and misinformation.
+
+Section 8.3
+
+Despite these challenges, optimism about the potential of AI to address humanity's most pressing problems remains widespread. AI-assisted drug discovery has already accelerated the identification of potential treatments for diseases that have resisted conventional approaches.
+
+Section 8.4
+
+Artificial intelligence has transformed nearly every sector of the global economy over the past decade. From healthcare diagnostics to financial modeling, from supply chain optimization to creative content generation, the technology has moved rapidly from research laboratories into production systems that affect billions of people daily.
+
+Section 8.5
+
+The labor market implications of widespread AI adoption are deeply contested. Some economists predict substantial displacement of white-collar work, particularly in roles involving routine information processing, document analysis, customer service, and certain aspects of legal and financial work.
+
+Section 8.6
+
+One of the most consequential questions facing society is how to govern these systems. Regulation has lagged behind deployment, and the international coordination needed to establish consistent global standards has proven elusive. Different jurisdictions are pursuing very different approaches.
+
+Section 8.7
+
+The development of large language models in particular has accelerated this transformation. These systems, trained on vast corpora of text, are capable of generating fluent prose, writing code, summarizing complex documents, translating between languages, and answering questions across an enormous range of domains.
+
+Section 8.8
+
+The environmental footprint of AI is also increasingly scrutinized. Training large foundation models requires enormous amounts of compute, which translates into substantial energy consumption and carbon emissions. Data centers supporting AI inference at scale are significant consumers of electricity and water.
+
+Section 9.1
+
+The labor market implications of widespread AI adoption are deeply contested. Some economists predict substantial displacement of white-collar work, particularly in roles involving routine information processing, document analysis, customer service, and certain aspects of legal and financial work.
+
+Section 9.2
+
+The development of large language models in particular has accelerated this transformation. These systems, trained on vast corpora of text, are capable of generating fluent prose, writing code, summarizing complex documents, translating between languages, and answering questions across an enormous range of domains.
+
+Section 9.3
+
+Artificial intelligence has transformed nearly every sector of the global economy over the past decade. From healthcare diagnostics to financial modeling, from supply chain optimization to creative content generation, the technology has moved rapidly from research laboratories into production systems that affect billions of people daily.
+
+Section 9.4
+
+Despite these challenges, optimism about the potential of AI to address humanity's most pressing problems remains widespread. AI-assisted drug discovery has already accelerated the identification of potential treatments for diseases that have resisted conventional approaches.
+
+Section 9.5
+
+Privacy is another area of growing concern. Modern AI systems raise fundamental questions about consent, data ownership, and the appropriate boundaries of surveillance. Recommendation systems optimize for engagement metrics in ways that can amplify polarization and misinformation.
+
+Section 9.6
+
+The environmental footprint of AI is also increasingly scrutinized. Training large foundation models requires enormous amounts of compute, which translates into substantial energy consumption and carbon emissions. Data centers supporting AI inference at scale are significant consumers of electricity and water.
+
+Section 9.7
+
+One of the most consequential questions facing society is how to govern these systems. Regulation has lagged behind deployment, and the international coordination needed to establish consistent global standards has proven elusive. Different jurisdictions are pursuing very different approaches.
+
+Section 9.8
+
+The governance question ultimately comes down to values: who decides what AI systems should optimize for, whose interests they should serve, and what harms are acceptable in pursuit of what benefits. These are not technical questions but political and ethical ones.
+
+Section 10.1
+
+The development of large language models in particular has accelerated this transformation. These systems, trained on vast corpora of text, are capable of generating fluent prose, writing code, summarizing complex documents, translating between languages, and answering questions across an enormous range of domains.
+
+Section 10.2
+
+The labor market implications of widespread AI adoption are deeply contested. Some economists predict substantial displacement of white-collar work, particularly in roles involving routine information processing, document analysis, customer service, and certain aspects of legal and financial work.
+
+Section 10.3
+
+One of the most consequential questions facing society is how to govern these systems. Regulation has lagged behind deployment, and the international coordination needed to establish consistent global standards has proven elusive. Different jurisdictions are pursuing very different approaches.
+
+Section 10.4
+
+Artificial intelligence has transformed nearly every sector of the global economy over the past decade. From healthcare diagnostics to financial modeling, from supply chain optimization to creative content generation, the technology has moved rapidly from research laboratories into production systems that affect billions of people daily.
+
+Section 10.5
+
+The governance question ultimately comes down to values: who decides what AI systems should optimize for, whose interests they should serve, and what harms are acceptable in pursuit of what benefits. These are not technical questions but political and ethical ones.
+
+Section 10.6
+
+The environmental footprint of AI is also increasingly scrutinized. Training large foundation models requires enormous amounts of compute, which translates into substantial energy consumption and carbon emissions. Data centers supporting AI inference at scale are significant consumers of electricity and water.
+
+Section 10.7
+
+Despite these challenges, optimism about the potential of AI to address humanity's most pressing problems remains widespread. AI-assisted drug discovery has already accelerated the identification of potential treatments for diseases that have resisted conventional approaches.
+
+Section 10.8
+
+Privacy is another area of growing concern. Modern AI systems raise fundamental questions about consent, data ownership, and the appropriate boundaries of surveillance. Recommendation systems optimize for engagement metrics in ways that can amplify polarization and misinformation.
+
+Section 11.1
+
+One of the most consequential questions facing society is how to govern these systems. Regulation has lagged behind deployment, and the international coordination needed to establish consistent global standards has proven elusive. Different jurisdictions are pursuing very different approaches.
+
+Section 11.2
+
+The labor market implications of widespread AI adoption are deeply contested. Some economists predict substantial displacement of white-collar work, particularly in roles involving routine information processing, document analysis, customer service, and certain aspects of legal and financial work.
+
+Section 11.3
+
+Artificial intelligence has transformed nearly every sector of the global economy over the past decade. From healthcare diagnostics to financial modeling, from supply chain optimization to creative content generation, the technology has moved rapidly from research laboratories into production systems that affect billions of people daily.
+
+Section 11.4
+
+The development of large language models in particular has accelerated this transformation. These systems, trained on vast corpora of text, are capable of generating fluent prose, writing code, summarizing complex documents, translating between languages, and answering questions across an enormous range of domains.
+
+Section 11.5
+
+The environmental footprint of AI is also increasingly scrutinized. Training large foundation models requires enormous amounts of compute, which translates into substantial energy consumption and carbon emissions. Data centers supporting AI inference at scale are significant consumers of electricity and water.
+
+Section 11.6
+
+Privacy is another area of growing concern. Modern AI systems raise fundamental questions about consent, data ownership, and the appropriate boundaries of surveillance. Recommendation systems optimize for engagement metrics in ways that can amplify polarization and misinformation.
+
+Section 11.7
+
+Despite these challenges, optimism about the potential of AI to address humanity's most pressing problems remains widespread. AI-assisted drug discovery has already accelerated the identification of potential treatments for diseases that have resisted conventional approaches.
+
+Section 11.8
+
+The governance question ultimately comes down to values: who decides what AI systems should optimize for, whose interests they should serve, and what harms are acceptable in pursuit of what benefits. These are not technical questions but political and ethical ones.
+
+Section 12.1
+
+One of the most consequential questions facing society is how to govern these systems. Regulation has lagged behind deployment, and the international coordination needed to establish consistent global standards has proven elusive. Different jurisdictions are pursuing very different approaches.
+
+Section 12.2
+
+The labor market implications of widespread AI adoption are deeply contested. Some economists predict substantial displacement of white-collar work, particularly in roles involving routine information processing, document analysis, customer service, and certain aspects of legal and financial work.
+
+Section 12.3
+
+Despite these challenges, optimism about the potential of AI to address humanity's most pressing problems remains widespread. AI-assisted drug discovery has already accelerated the identification of potential treatments for diseases that have resisted conventional approaches.
+
+Section 12.4
+
+The development of large language models in particular has accelerated this transformation. These systems, trained on vast corpora of text, are capable of generating fluent prose, writing code, summarizing complex documents, translating between languages, and answering questions across an enormous range of domains.
+
+Section 12.5
+
+Artificial intelligence has transformed nearly every sector of the global economy over the past decade. From healthcare diagnostics to financial modeling, from supply chain optimization to creative content generation, the technology has moved rapidly from research laboratories into production systems that affect billions of people daily.
+
+Section 12.6
+
+Privacy is another area of growing concern. Modern AI systems raise fundamental questions about consent, data ownership, and the appropriate boundaries of surveillance. Recommendation systems optimize for engagement metrics in ways that can amplify polarization and misinformation.
+
+Section 12.7
+
+The environmental footprint of AI is also increasingly scrutinized. Training large foundation models requires enormous amounts of compute, which translates into substantial energy consumption and carbon emissions. Data centers supporting AI inference at scale are significant consumers of electricity and water.
+
+Section 12.8
+
+The governance question ultimately comes down to values: who decides what AI systems should optimize for, whose interests they should serve, and what harms are acceptable in pursuit of what benefits. These are not technical questions but political and ethical ones.
+
+Section 13.1
+
+Privacy is another area of growing concern. Modern AI systems raise fundamental questions about consent, data ownership, and the appropriate boundaries of surveillance. Recommendation systems optimize for engagement metrics in ways that can amplify polarization and misinformation.
+
+Section 13.2
+
+The governance question ultimately comes down to values: who decides what AI systems should optimize for, whose interests they should serve, and what harms are acceptable in pursuit of what benefits. These are not technical questions but political and ethical ones.
+
+Section 13.3
+
+The labor market implications of widespread AI adoption are deeply contested. Some economists predict substantial displacement of white-collar work, particularly in roles involving routine information processing, document analysis, customer service, and certain aspects of legal and financial work.
+
+Section 13.4
+
+Artificial intelligence has transformed nearly every sector of the global economy over the past decade. From healthcare diagnostics to financial modeling, from supply chain optimization to creative content generation, the technology has moved rapidly from research laboratories into production systems that affect billions of people daily.
+
+Section 13.5
+
+One of the most consequential questions facing society is how to govern these systems. Regulation has lagged behind deployment, and the international coordination needed to establish consistent global standards has proven elusive. Different jurisdictions are pursuing very different approaches.
+
+Section 13.6
+
+The development of large language models in particular has accelerated this transformation. These systems, trained on vast corpora of text, are capable of generating fluent prose, writing code, summarizing complex documents, translating between languages, and answering questions across an enormous range of domains.
+
+Section 13.7
+
+Despite these challenges, optimism about the potential of AI to address humanity's most pressing problems remains widespread. AI-assisted drug discovery has already accelerated the identification of potential treatments for diseases that have resisted conventional approaches.
+
+Section 13.8
+
+The environmental footprint of AI is also increasingly scrutinized. Training large foundation models requires enormous amounts of compute, which translates into substantial energy consumption and carbon emissions. Data centers supporting AI inference at scale are significant consumers of electricity and water.
+
+Section 14.1
+
+The development of large language models in particular has accelerated this transformation. These systems, trained on vast corpora of text, are capable of generating fluent prose, writing code, summarizing complex documents, translating between languages, and answering questions across an enormous range of domains.
+
+Section 14.2
+
+The governance question ultimately comes down to values: who decides what AI systems should optimize for, whose interests they should serve, and what harms are acceptable in pursuit of what benefits. These are not technical questions but political and ethical ones.
+
+Section 14.3
+
+The labor market implications of widespread AI adoption are deeply contested. Some economists predict substantial displacement of white-collar work, particularly in roles involving routine information processing, document analysis, customer service, and certain aspects of legal and financial work.
+
+Section 14.4
+
+Privacy is another area of growing concern. Modern AI systems raise fundamental questions about consent, data ownership, and the appropriate boundaries of surveillance. Recommendation systems optimize for engagement metrics in ways that can amplify polarization and misinformation.
+
+Section 14.5
+
+The environmental footprint of AI is also increasingly scrutinized. Training large foundation models requires enormous amounts of compute, which translates into substantial energy consumption and carbon emissions. Data centers supporting AI inference at scale are significant consumers of electricity and water.
+
+Section 14.6
+
+Artificial intelligence has transformed nearly every sector of the global economy over the past decade. From healthcare diagnostics to financial modeling, from supply chain optimization to creative content generation, the technology has moved rapidly from research laboratories into production systems that affect billions of people daily.
+
+Section 14.7
+
+One of the most consequential questions facing society is how to govern these systems. Regulation has lagged behind deployment, and the international coordination needed to establish consistent global standards has proven elusive. Different jurisdictions are pursuing very different approaches.
+
+Section 14.8
+
+Despite these challenges, optimism about the potential of AI to address humanity's most pressing problems remains widespread. AI-assisted drug discovery has already accelerated the identification of potential treatments for diseases that have resisted conventional approaches.
+
+Section 15.1
+
+The governance question ultimately comes down to values: who decides what AI systems should optimize for, whose interests they should serve, and what harms are acceptable in pursuit of what benefits. These are not technical questions but political and ethical ones.
+
+Section 15.2
+
+Artificial intelligence has transformed nearly every sector of the global economy over the past decade. From healthcare diagnostics to financial modeling, from supply chain optimization to creative content generation, the technology has moved rapidly from research laboratories into production systems that affect billions of people daily.
+
+Section 15.3
+
+The labor market implications of widespread AI adoption are deeply contested. Some economists predict substantial displacement of white-collar work, particularly in roles involving routine information processing, document analysis, customer service, and certain aspects of legal and financial work.
+
+Section 15.4
+
+The environmental footprint of AI is also increasingly scrutinized. Training large foundation models requires enormous amounts of compute, which translates into substantial energy consumption and carbon emissions. Data centers supporting AI inference at scale are significant consumers of electricity and water.
+
+Section 15.5
+
+Privacy is another area of growing concern. Modern AI systems raise fundamental questions about consent, data ownership, and the appropriate boundaries of surveillance. Recommendation systems optimize for engagement metrics in ways that can amplify polarization and misinformation.
+
+Section 15.6
+
+The development of large language models in particular has accelerated this transformation. These systems, trained on vast corpora of text, are capable of generating fluent prose, writing code, summarizing complex documents, translating between languages, and answering questions across an enormous range of domains.
+
+Section 15.7
+
+One of the most consequential questions facing society is how to govern these systems. Regulation has lagged behind deployment, and the international coordination needed to establish consistent global standards has proven elusive. Different jurisdictions are pursuing very different approaches.
+
+Section 15.8
+
+Despite these challenges, optimism about the potential of AI to address humanity's most pressing problems remains widespread. AI-assisted drug discovery has already accelerated the identification of potential treatments for diseases that have resisted conventional approaches.
+
+Section 16.1
+
+The development of large language models in particular has accelerated this transformation. These systems, trained on vast corpora of text, are capable of generating fluent prose, writing code, summarizing complex documents, translating between languages, and answering questions across an enormous range of domains.
+
+Section 16.2
+
+The governance question ultimately comes down to values: who decides what AI systems should optimize for, whose interests they should serve, and what harms are acceptable in pursuit of what benefits. These are not technical questions but political and ethical ones.
+
+Section 16.3
+
+Privacy is another area of growing concern. Modern AI systems raise fundamental questions about consent, data ownership, and the appropriate boundaries of surveillance. Recommendation systems optimize for engagement metrics in ways that can amplify polarization and misinformation.
+
+Section 16.4
+
+One of the most consequential questions facing society is how to govern these systems. Regulation has lagged behind deployment, and the international coordination needed to establish consistent global standards has proven elusive. Different jurisdictions are pursuing very different approaches.
+
+Section 16.5
+
+The labor market implications of widespread AI adoption are deeply contested. Some economists predict substantial displacement of white-collar work, particularly in roles involving routine information processing, document analysis, customer service, and certain aspects of legal and financial work.
+
+Section 16.6
+
+Artificial intelligence has transformed nearly every sector of the global economy over the past decade. From healthcare diagnostics to financial modeling, from supply chain optimization to creative content generation, the technology has moved rapidly from research laboratories into production systems that affect billions of people daily.
+
+Section 16.7
+
+The environmental footprint of AI is also increasingly scrutinized. Training large foundation models requires enormous amounts of compute, which translates into substantial energy consumption and carbon emissions. Data centers supporting AI inference at scale are significant consumers of electricity and water.
+
+Section 16.8
+
+Despite these challenges, optimism about the potential of AI to address humanity's most pressing problems remains widespread. AI-assisted drug discovery has already accelerated the identification of potential treatments for diseases that have resisted conventional approaches.
+
+Section 17.1
+
+One of the most consequential questions facing society is how to govern these systems. Regulation has lagged behind deployment, and the international coordination needed to establish consistent global standards has proven elusive. Different jurisdictions are pursuing very different approaches.
+
+Section 17.2
+
+Artificial intelligence has transformed nearly every sector of the global economy over the past decade. From healthcare diagnostics to financial modeling, from supply chain optimization to creative content generation, the technology has moved rapidly from research laboratories into production systems that affect billions of people daily.
+
+Section 17.3
+
+The development of large language models in particular has accelerated this transformation. These systems, trained on vast corpora of text, are capable of generating fluent prose, writing code, summarizing complex documents, translating between languages, and answering questions across an enormous range of domains.
+
+Section 17.4
+
+The governance question ultimately comes down to values: who decides what AI systems should optimize for, whose interests they should serve, and what harms are acceptable in pursuit of what benefits. These are not technical questions but political and ethical ones.
+
+Section 17.5
+
+Despite these challenges, optimism about the potential of AI to address humanity's most pressing problems remains widespread. AI-assisted drug discovery has already accelerated the identification of potential treatments for diseases that have resisted conventional approaches.
+
+Section 17.6
+
+The environmental footprint of AI is also increasingly scrutinized. Training large foundation models requires enormous amounts of compute, which translates into substantial energy consumption and carbon emissions. Data centers supporting AI inference at scale are significant consumers of electricity and water.
+
+Section 17.7
+
+Privacy is another area of growing concern. Modern AI systems raise fundamental questions about consent, data ownership, and the appropriate boundaries of surveillance. Recommendation systems optimize for engagement metrics in ways that can amplify polarization and misinformation.
+
+Section 17.8
+
+The labor market implications of widespread AI adoption are deeply contested. Some economists predict substantial displacement of white-collar work, particularly in roles involving routine information processing, document analysis, customer service, and certain aspects of legal and financial work.
+
+Section 18.1
+
+Despite these challenges, optimism about the potential of AI to address humanity's most pressing problems remains widespread. AI-assisted drug discovery has already accelerated the identification of potential treatments for diseases that have resisted conventional approaches.
+
+Section 18.2
+
+The development of large language models in particular has accelerated this transformation. These systems, trained on vast corpora of text, are capable of generating fluent prose, writing code, summarizing complex documents, translating between languages, and answering questions across an enormous range of domains.
+
+Section 18.3
+
+Artificial intelligence has transformed nearly every sector of the global economy over the past decade. From healthcare diagnostics to financial modeling, from supply chain optimization to creative content generation, the technology has moved rapidly from research laboratories into production systems that affect billions of people daily.
+
+Section 18.4
+
+The environmental footprint of AI is also increasingly scrutinized. Training large foundation models requires enormous amounts of compute, which translates into substantial energy consumption and carbon emissions. Data centers supporting AI inference at scale are significant consumers of electricity and water.
+
+Section 18.5
+
+The governance question ultimately comes down to values: who decides what AI systems should optimize for, whose interests they should serve, and what harms are acceptable in pursuit of what benefits. These are not technical questions but political and ethical ones.
+
+Section 18.6
+
+Privacy is another area of growing concern. Modern AI systems raise fundamental questions about consent, data ownership, and the appropriate boundaries of surveillance. Recommendation systems optimize for engagement metrics in ways that can amplify polarization and misinformation.
+
+Section 18.7
+
+One of the most consequential questions facing society is how to govern these systems. Regulation has lagged behind deployment, and the international coordination needed to establish consistent global standards has proven elusive. Different jurisdictions are pursuing very different approaches.
+
+Section 18.8
+
+The labor market implications of widespread AI adoption are deeply contested. Some economists predict substantial displacement of white-collar work, particularly in roles involving routine information processing, document analysis, customer service, and certain aspects of legal and financial work.
+
+Section 19.1
+
+Artificial intelligence has transformed nearly every sector of the global economy over the past decade. From healthcare diagnostics to financial modeling, from supply chain optimization to creative content generation, the technology has moved rapidly from research laboratories into production systems that affect billions of people daily.
+
+Section 19.2
+
+The environmental footprint of AI is also increasingly scrutinized. Training large foundation models requires enormous amounts of compute, which translates into substantial energy consumption and carbon emissions. Data centers supporting AI inference at scale are significant consumers of electricity and water.
+
+Section 19.3
+
+The governance question ultimately comes down to values: who decides what AI systems should optimize for, whose interests they should serve, and what harms are acceptable in pursuit of what benefits. These are not technical questions but political and ethical ones.
+
+Section 19.4
+
+One of the most consequential questions facing society is how to govern these systems. Regulation has lagged behind deployment, and the international coordination needed to establish consistent global standards has proven elusive. Different jurisdictions are pursuing very different approaches.
+
+Section 19.5
+
+Despite these challenges, optimism about the potential of AI to address humanity's most pressing problems remains widespread. AI-assisted drug discovery has already accelerated the identification of potential treatments for diseases that have resisted conventional approaches.
+
+Section 19.6
+
+The development of large language models in particular has accelerated this transformation. These systems, trained on vast corpora of text, are capable of generating fluent prose, writing code, summarizing complex documents, translating between languages, and answering questions across an enormous range of domains.
+
+Section 19.7
+
+The labor market implications of widespread AI adoption are deeply contested. Some economists predict substantial displacement of white-collar work, particularly in roles involving routine information processing, document analysis, customer service, and certain aspects of legal and financial work.
+
+Section 19.8
+
+Privacy is another area of growing concern. Modern AI systems raise fundamental questions about consent, data ownership, and the appropriate boundaries of surveillance. Recommendation systems optimize for engagement metrics in ways that can amplify polarization and misinformation.
+
+Section 20.1
+
+One of the most consequential questions facing society is how to govern these systems. Regulation has lagged behind deployment, and the international coordination needed to establish consistent global standards has proven elusive. Different jurisdictions are pursuing very different approaches.
+
+Section 20.2
+
+The development of large language models in particular has accelerated this transformation. These systems, trained on vast corpora of text, are capable of generating fluent prose, writing code, summarizing complex documents, translating between languages, and answering questions across an enormous range of domains.
+
+Section 20.3
+
+The governance question ultimately comes down to values: who decides what AI systems should optimize for, whose interests they should serve, and what harms are acceptable in pursuit of what benefits. These are not technical questions but political and ethical ones.
+
+Section 20.4
+
+Artificial intelligence has transformed nearly every sector of the global economy over the past decade. From healthcare diagnostics to financial modeling, from supply chain optimization to creative content generation, the technology has moved rapidly from research laboratories into production systems that affect billions of people daily.
+
+Section 20.5
+
+The labor market implications of widespread AI adoption are deeply contested. Some economists predict substantial displacement of white-collar work, particularly in roles involving routine information processing, document analysis, customer service, and certain aspects of legal and financial work.
+
+Section 20.6
+
+Despite these challenges, optimism about the potential of AI to address humanity's most pressing problems remains widespread. AI-assisted drug discovery has already accelerated the identification of potential treatments for diseases that have resisted conventional approaches.
+
+Section 20.7
+
+Privacy is another area of growing concern. Modern AI systems raise fundamental questions about consent, data ownership, and the appropriate boundaries of surveillance. Recommendation systems optimize for engagement metrics in ways that can amplify polarization and misinformation.
+
+Section 20.8
+
+The environmental footprint of AI is also increasingly scrutinized. Training large foundation models requires enormous amounts of compute, which translates into substantial energy consumption and carbon emissions. Data centers supporting AI inference at scale are significant consumers of electricity and water.
+
+Conclusion
+
+The intersection of artificial intelligence and society represents one of the defining challenges of the twenty-first century. How we navigate it will depend on our ability to build institutions capable of keeping pace with rapid technological change.

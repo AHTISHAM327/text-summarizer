@@ -1,0 +1,61 @@
+Q3 Product Roadmap Planning Meeting
+Date: July 14, 2026
+Attendees: Sarah Chen (PM), Dev Kapoor (Engineering Lead), Priya Mehta (Design),
+           Marcus Webb (Data), Fatima Al-Rashid (Customer Success)
+Facilitator: Sarah Chen
+
+--- AGENDA ITEMS ---
+
+1. Review Q2 OKR outcomes
+Sarah opened by walking through Q2 results. The team shipped the bulk export feature
+two weeks late but it landed well with customers — 68% of enterprise accounts used it
+within the first month. The onboarding redesign hit its 30-day activation target of
+42% (goal was 40%). The search performance project was deprioritized in May due to
+the infrastructure incident and will carry over to Q3. Overall: 2 of 3 key results
+met, 1 carried over.
+
+2. Q3 priorities discussion
+Dev flagged that the search carry-over plus two new platform requests from the sales
+team means engineering is already at capacity without any new initiatives. He asked
+for explicit prioritization before the team commits to anything.
+
+Sarah proposed the following Q3 stack rank (subject to leadership alignment):
+  1. Search performance (carry-over — blocking enterprise renewals)
+  2. API rate limiting controls (requested by 4 enterprise accounts, high churn risk)
+  3. Bulk tagging / labeling (top item on the public roadmap, 312 upvotes)
+  4. Mobile push notifications (nice-to-have, not blocking any deals)
+
+Fatima confirmed the API rate limiting request is urgent: two accounts have explicitly
+mentioned it in renewal calls, and one has a contractual SLA that may be at risk.
+
+Marcus asked whether there is data to support deprioritizing mobile notifications.
+He noted that usage analytics show 34% of active users are mobile-first. Sarah agreed
+to pull a more detailed segment breakdown before the decision is finalized.
+
+Priya raised a design resourcing concern: she is currently carrying three projects
+from Q2 and cannot take on bulk tagging without something coming off her plate.
+Action item: Sarah to work with Priya offline to identify what can be deferred.
+
+3. Process change: weekly async status update
+Starting next week the team will post a 3-bullet async update every Friday in Slack
+(#product-sync channel) rather than holding the existing 30-minute weekly sync.
+The weekly sync will move to bi-weekly. Dev and Priya both supported this change.
+Fatima asked whether customer success would be added to the channel — Sarah to
+send invite.
+
+4. Dependencies and blockers
+- Search project needs infra environment access from the platform team (Dev to follow
+  up with Jordan by EOW).
+- API rate limiting design specs need sign-off from security team before dev begins
+  (Fatima to loop in James from Security).
+- No blockers on bulk tagging yet; discovery phase starts next sprint.
+
+--- ACTION ITEMS ---
+[ ] Sarah: Pull mobile segment breakdown by July 18
+[ ] Sarah: Work with Priya on design capacity plan
+[ ] Sarah: Add Fatima to #product-sync Slack channel
+[ ] Dev: Follow up with Jordan (platform team) on infra access by July 18
+[ ] Fatima: Loop in James (Security) on API rate limiting review
+[ ] All: Post first async Friday update on July 18
+
+Next meeting: July 28 (bi-weekly sync, 60 min)

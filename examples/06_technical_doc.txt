@@ -1,0 +1,91 @@
+Authentication Service — Technical Design Document v1.3
+
+Overview
+--------
+This document describes the architecture and implementation details of the
+Authentication Service (AuthSvc), which handles user identity verification, session
+management, and token issuance for all internal microservices in the platform.
+
+AuthSvc is implemented as a stateless REST API deployed on Kubernetes. It issues
+short-lived JSON Web Tokens (JWTs) for authenticated sessions and refresh tokens
+stored in Redis for session persistence.
+
+Architecture
+------------
+AuthSvc sits behind the API Gateway and is the sole issuer of JWTs in the system.
+All other services validate tokens using the shared public key (JWKS endpoint) and
+do not call AuthSvc for every request — they only call it at login, logout, and token
+refresh time. This design keeps AuthSvc off the critical path for most requests.
+
+Components:
+  - Login endpoint (POST /auth/login): Accepts email + password, validates against
+    the User Service, issues access token (15-min TTL) and refresh token (7-day TTL).
+  - Refresh endpoint (POST /auth/refresh): Accepts a valid refresh token, issues a
+    new access token. Refresh token is rotated on every use (rotation invalidates the
+    old token immediately).
+  - Logout endpoint (POST /auth/logout): Adds the refresh token to the Redis revocation
+    list with a TTL matching the token's remaining lifetime.
+  - JWKS endpoint (GET /.well-known/jwks.json): Exposes the public key for token
+    verification by downstream services.
+
+Token Design
+------------
+Access tokens are RS256-signed JWTs containing:
+  - sub: user UUID
+  - email: user's email address
+  - roles: array of role strings (e.g., ["admin", "viewer"])
+  - iat / exp: issued-at and expiry timestamps
+  - jti: unique token ID for audit logging
+
+Refresh tokens are opaque 256-bit random strings stored as hashes in Redis, keyed
+by token hash, with the value being the user UUID and expiry. This avoids storing
+sensitive token material in plaintext.
+
+Security Considerations
+-----------------------
+1. Password hashing: bcrypt with cost factor 12. The cost factor was chosen based
+   on a benchmark targeting 200ms per hash on the current instance type (c5.large).
+   Adjust the cost factor when upgrading instance types.
+
+2. Brute force protection: Five failed login attempts within 10 minutes triggers a
+   15-minute IP-level lockout via a Redis counter. Account lockouts (email-level) are
+   not implemented to avoid user enumeration via account status.
+
+3. Token revocation: Access tokens cannot be revoked before expiry (by design, to
+   keep AuthSvc off the hot path). The 15-minute TTL is a deliberate trade-off.
+   For immediate revocation requirements (e.g., account compromise), the recommended
+   approach is to rotate the signing key, which invalidates all outstanding tokens.
+
+4. HTTPS only: All endpoints reject plain HTTP connections at the load balancer level.
+   TLS 1.2 minimum, TLS 1.3 preferred.
+
+5. Secrets management: The RSA private key and Redis credentials are injected via
+   Kubernetes Secrets mounted as environment variables. They are never logged.
+
+Deployment
+----------
+AuthSvc is deployed as a Kubernetes Deployment with a minimum of 2 replicas and
+HPA configured to scale up to 10 replicas at 70% CPU utilization. It is stateless
+(all state lives in Redis and the User Service), so scaling is straightforward.
+
+Health checks:
+  - Liveness probe: GET /healthz — returns 200 if the service process is alive.
+  - Readiness probe: GET /readyz — returns 200 only if the Redis connection and the
+    User Service connection are both healthy.
+
+Known Limitations
+-----------------
+- Multi-device logout (logging out from all devices simultaneously) is not yet
+  supported. Logging out invalidates only the presented refresh token; other active
+  refresh tokens remain valid.
+- Social login (OAuth 2.0 / OIDC) is planned for Q4 but not yet implemented.
+- The revocation list in Redis grows unboundedly until TTLs expire. At current
+  scale this is not a problem, but a cleanup job should be implemented before
+  daily active users exceed 500,000.
+
+Open Questions
+--------------
+- Should the access token TTL be reduced from 15 minutes to 5 minutes for
+  higher-security tenants? (Requires per-tenant configuration support.)
+- Is the 7-day refresh token TTL appropriate for mobile clients, where users
+  expect to stay logged in for months?

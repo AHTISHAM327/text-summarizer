@@ -1,0 +1,33 @@
+Support Ticket #48502
+Priority: High
+Account: Nexus Analytics (Enterprise, 320 seats)
+Submitted by: Omar Farouk, Head of Data Engineering
+Date: July 10, 2026
+
+Issue Description:
+We are hitting the API rate limit every single day and it is causing significant
+workflow disruption. Our data pipeline makes approximately 1,200 calls per hour
+during business hours, which exceeds the current Enterprise cap of 1,000 calls/hour.
+
+We are aware of the documented limit. The problem is that our use case has grown
+substantially since we signed our contract 18 months ago. At the time, 1,000/hour
+was more than sufficient. It no longer is.
+
+Specific impact:
+- Our nightly reconciliation job fails approximately 3-4 nights per week because
+  the batch processing hits the limit partway through and cannot retry until the
+  window resets.
+- Our sales team's dashboard, which polls the API for real-time data, experiences
+  blank screens or stale data for 10-15 minute windows during peak hours.
+- We've had to implement hacky backoff logic that adds latency to user-facing features.
+
+What we need:
+1. A temporary limit increase to at least 2,000 calls/hour while we negotiate
+   a revised contract tier.
+2. Information on what an Enterprise Plus or custom rate limit tier would cost.
+3. If a limit increase is not immediately possible, guidance on whether request
+   batching is supported (combining multiple record fetches into a single API call).
+
+We are up for renewal in 3 months. If this cannot be resolved before then, we
+will need to seriously evaluate alternatives. I'd prefer not to do that — we
+generally like the product — but this is blocking real business operations.
