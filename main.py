@@ -2,8 +2,8 @@
 Command-line text summarizer.
 
 Usage:
-    python main.py <file_path>
-    python main.py --batch <directory>
+    python main.py --file <file_path> [--length short|medium|long] [--json]
+    python main.py --batch <directory> [--length short|medium|long]
 
 Exits with status 0 on success and 1 on any error, so the tool can be
 used safely in shell scripts and pipelines.
@@ -19,11 +19,11 @@ from dotenv import load_dotenv
 from google import genai
 from google.genai import errors as genai_errors
 
-from prompts import SUMMARIZE_PROMPT
+from prompts import get_summarize_prompt
 
 load_dotenv()
 
-USAGE = "Usage: python main.py <file_path> [--json] | python main.py --batch <directory>"
+USAGE = "Usage: python main.py --file <file_path> [--json] | python main.py --batch <directory>"
 MODEL_NAME = "gemini-flash-latest"
 LARGE_FILE_THRESHOLD = 50_000
 
@@ -108,19 +108,22 @@ def load_file(file_path, quiet=False):
     return text
 
 
-def summarize(text):
+def summarize(text, length="medium"):
     """
     Summarize the given text using the Gemini API.
 
     Day 2 change: replaces the Day 1 stub with a real call to the
     Gemini API (model: gemini-flash-latest) via the google-genai SDK, using
-    prompts.SUMMARIZE_PROMPT formatted with the input text. Like
+    a prompt built by prompts.get_summarize_prompt(). Like
     load_file(), this prints its own user-facing error message (never
     a stack trace) and returns None on failure; callers only need to
     check for None.
 
     Args:
         text (str): The text to summarize.
+        length (str): Desired summary length, passed through to
+            get_summarize_prompt(): "short", "medium", or "long".
+            Defaults to "medium".
 
     Returns:
         str | None: The summary text, or None on failure.
@@ -133,7 +136,11 @@ def summarize(text):
         )
         return None
 
-    prompt = SUMMARIZE_PROMPT.format(text=text)
+    try:
+        prompt = get_summarize_prompt(text=text, length=length)
+    except ValueError as e:
+        print(f"❌ Error: {e}", file=sys.stderr)
+        return None
 
     try:
         client = genai.Client(api_key=api_key)
@@ -145,7 +152,10 @@ def summarize(text):
                 file=sys.stderr,
             )
         else:
-            print(f"❌ Error: Gemini API rejected the request: {e.message}", file=sys.stderr)
+            print(
+                f"❌ Error: Gemini API rejected the request: {e.message}",
+                file=sys.stderr,
+            )
         return None
     except genai_errors.ServerError as e:
         print(f"❌ Error: Gemini API server error: {e.message}", file=sys.stderr)
@@ -165,7 +175,7 @@ def summarize(text):
     return summary
 
 
-def summarize_file(file_path):
+def summarize_file(file_path, length="medium"):
     """Load a text file and summarize it, returning a result dict.
 
     Composes load_file() and summarize(). Both of those print their own
@@ -174,6 +184,9 @@ def summarize_file(file_path):
 
     Args:
         file_path (str): Path to the UTF-8 text file to summarize.
+        length (str): Desired summary length, passed through to
+            summarize(): "short", "medium", or "long". Defaults to
+            "medium".
 
     Returns:
         dict | None: On success, a dict with the keys "summary",
@@ -189,7 +202,7 @@ def summarize_file(file_path):
     if text is None:
         return None
 
-    summary = summarize(text)
+    summary = summarize(text, length=length)
     if summary is None:
         return None
 
@@ -201,7 +214,7 @@ def summarize_file(file_path):
     }
 
 
-def batch_summarize_directory(directory_path, on_progress=None):
+def batch_summarize_directory(directory_path, on_progress=None, length="medium"):
     """Summarize every top-level .txt file in a directory.
 
     Discovers .txt files directly inside directory_path (non-recursive),
@@ -218,6 +231,9 @@ def batch_summarize_directory(directory_path, on_progress=None):
             each file is processed, as on_progress(index, total,
             filename) with a 1-based index. Used by the CLI to report
             progress without this function printing anything itself.
+        length (str): Desired summary length, passed through to
+            summarize_file(): "short", "medium", or "long". Defaults
+            to "medium".
 
     Returns:
         list[dict]: One dict per .txt file, in alphabetical filename
@@ -243,7 +259,7 @@ def batch_summarize_directory(directory_path, on_progress=None):
             on_progress(index, len(txt_files), filename)
 
         file_path = os.path.join(directory_path, filename)
-        result = summarize_file(file_path)
+        result = summarize_file(file_path, length=length)
         if result is None:
             result = {"source_file": file_path, "error": "failed", "summary": None}
         results.append(result)
@@ -251,7 +267,7 @@ def batch_summarize_directory(directory_path, on_progress=None):
     return results
 
 
-def run_batch(directory_path):
+def run_batch(directory_path, length="medium"):
     """Run batch mode: summarize a directory and print a JSON array.
 
     Prints progress and status lines to stderr and the full results
@@ -260,6 +276,8 @@ def run_batch(directory_path):
     Args:
         directory_path (str): Directory containing the .txt files to
             summarize.
+        length (str): Desired summary length for every file: "short",
+            "medium", or "long". Defaults to "medium".
 
     Returns:
         int: Process exit code — 0 if every file succeeded, 1 if any
@@ -274,7 +292,9 @@ def run_batch(directory_path):
         print(f"⚙️ Processing {index}/{total}: {filename}", file=sys.stderr)
 
     try:
-        results = batch_summarize_directory(directory_path, on_progress=report_progress)
+        results = batch_summarize_directory(
+            directory_path, on_progress=report_progress, length=length
+        )
     except OSError as e:
         print(
             f"❌ Error: Could not read directory {directory_path}: {e.strerror or e}",
@@ -296,7 +316,10 @@ def run_batch(directory_path):
         )
         return 1
 
-    print(f"✅ Batch complete: {len(results)}/{len(results)} files succeeded.", file=sys.stderr)
+    print(
+        f"✅ Batch complete: {len(results)}/{len(results)} files succeeded.",
+        file=sys.stderr,
+    )
     return 0
 
 
@@ -304,27 +327,30 @@ def main():
     """
     Entry point for the command-line tool.
 
-    Accepts either a positional file path (single-file mode) or
-    --batch <directory> (batch mode); the two are mutually exclusive.
-    In single-file mode an optional --json flag switches output to a
-    single JSON object on stdout (with all emoji/status lines
-    suppressed) so the result can be piped into other tools. Batch
-    mode always prints a JSON array on stdout. Exits with status 1
-    (after a usage hint) when arguments are missing or invalid.
+    Accepts either --file <path> (single-file mode) or --batch
+    <directory> (batch mode); the two are mutually exclusive. An
+    optional --length flag picks the summary size (short, medium, or
+    long; default medium). In single-file mode an optional --json flag
+    switches output to a single JSON object on stdout (with all
+    emoji/status lines suppressed) so the result can be piped into
+    other tools. Batch mode always prints a JSON array on stdout.
+    Exits with status 1 (after a usage hint) when arguments are
+    missing or invalid.
     """
     parser = ArgParser(
         description="Summarize a text file using the Gemini API.",
         epilog=(
             "Examples:\n"
-            "  python main.py article.txt --json\n"
+            "  python main.py --file article.txt --json\n"
+            "  python main.py --file article.txt --length short\n"
             "  python main.py --batch ./articles"
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     input_group = parser.add_mutually_exclusive_group(required=True)
     input_group.add_argument(
-        "file_path",
-        nargs="?",
+        "--file",
+        metavar="FILE",
         help="path to the UTF-8 text file to summarize",
     )
     input_group.add_argument(
@@ -333,22 +359,33 @@ def main():
         help="summarize every top-level .txt file in DIRECTORY and print a JSON array",
     )
     parser.add_argument(
+        "--length",
+        default="medium",
+        help="summary length: short, medium, or long (default: medium)",
+    )
+    parser.add_argument(
         "--json",
         action="store_true",
         help="output a single JSON object on stdout instead of formatted text",
     )
     args = parser.parse_args()
 
+    # Validated here (not via argparse choices) so the message matches
+    # the project's exact error wording.
+    if args.length not in ("short", "medium", "long"):
+        print("❌ Error: length must be 'short', 'medium', or 'long'", file=sys.stderr)
+        sys.exit(1)
+
     if args.batch:
-        sys.exit(run_batch(args.batch))
+        sys.exit(run_batch(args.batch, length=args.length))
 
     # load_file() prints its own error message on failure, so only the
     # non-zero exit code is needed here.
-    text = load_file(args.file_path, quiet=args.json)
+    text = load_file(args.file, quiet=args.json)
     if text is None:
         sys.exit(1)
 
-    summary = summarize(text)
+    summary = summarize(text, length=args.length)
     if summary is None:
         sys.exit(1)
 
@@ -357,7 +394,7 @@ def main():
             "summary": summary,
             "word_count": len(summary.split()),
             "char_count": len(summary),
-            "source_file": args.file_path,
+            "source_file": args.file,
         }
         print(json.dumps(output, indent=2))
     else:
