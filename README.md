@@ -1,150 +1,134 @@
-# Text Summarizer
+# Text Summarizer CLI
 
-A command-line tool that turns long text files into clear 2–3 sentence summaries.
+> AI-powered summarization for documents and folders. Runs locally — no data leaves your machine except the text you send to the API.
 
-## What problem does it solve?
+## What It Does
 
-Reading long documents takes time. Whether it's a report, an article, or meeting notes, most of us just want the key points — fast. This tool takes any plain text file and produces a short, accurate summary, so you can understand a document in seconds instead of minutes. No copy-pasting into a chat window, no manual skimming.
+Takes any `.txt` file (or a folder of `.txt` files) and returns a clean, concise summary using Google Gemini. Supports three output lengths and structured JSON output for pipeline integration.
 
-## Why this tool?
+**Built for:**
+- Summarizing research papers, reports, and meeting notes
+- Batch-processing folders of articles, customer feedback, or support tickets
+- Integrating into existing scripts and pipelines via `--json` and clean exit codes
 
-- **A prompt that was actually tested, not guessed.** The summarization prompt was iterated and compared version-against-version before being committed — see [How it works](#how-it-works) and `test_prompts.md`.
-- **Built for pipelines.** A `--json` mode emits clean, machine-readable output on stdout, and a predictable exit code on every path — drop it straight into a shell script.
-- **Fails gracefully, never crashes.** Every error is a clear one-line message, never a stack trace. See [Error handling](#error-handling).
-- **Zero-friction demo.** A `sample.txt` ships with the project, so you can run a real summary the moment you clone it.
+## Features
 
-## Quick start
+| Feature | Description |
+|---------|-------------|
+| Single file mode | `--file path/to/doc.txt` |
+| Batch mode | `--batch path/to/folder/` — processes every top-level `.txt` file |
+| Length control | `--length short / medium / long` |
+| JSON output | `--json` returns a structured object with `word_count`, `char_count` |
+| Error-safe | Clean one-line messages for missing files, empty inputs, API errors — never a stack trace |
+| Exit codes | `0` on success, `1` on any failure (pipeline-friendly) |
+| Tested prompts | The summarization prompt was iterated version-against-version and the winner committed (see `test_prompts.md`) |
+
+## Setup
+
+**Requirements:** Python 3.9+, a free [Google AI Studio API key](https://aistudio.google.com/apikey)
 
 ```bash
-pip install -r requirements.txt        # install dependencies
-echo "GEMINI_API_KEY=your-key" > .env  # add your Gemini API key
-python main.py sample.txt              # summarize the bundled sample
+git clone https://github.com/YOUR_USERNAME/text-summarizer.git
+cd text-summarizer
+python3 -m pip install -r requirements.txt
 ```
 
-## Installation
+Create a `.env` file in the project root and add your key:
+
+```
+GEMINI_API_KEY=your_key_here
+```
+
+Then try it immediately with the bundled sample:
 
 ```bash
-pip install -r requirements.txt
+python3 main.py --file sample.txt
 ```
-
-Requires Python 3.8 or newer, and a `GEMINI_API_KEY` in a `.env` file in the project root. See [Requirements](#requirements) for the full list.
 
 ## Usage
 
+**Single file:**
 ```bash
-python main.py filename.txt
+python3 main.py --file path/to/document.txt
+python3 main.py --file report.txt --length short
+python3 main.py --file report.txt --json
 ```
 
-Point it at any plain text file and it prints a summary to the terminal. Try it right away with the bundled sample:
-
+**Batch mode (entire folder):**
 ```bash
-python main.py sample.txt
+python3 main.py --batch ./documents/
+python3 main.py --batch ./documents/ --length short
 ```
 
-Add `--json` to get a single JSON object on stdout instead (summary, word count, char count, source file) for piping into other tools:
+Batch mode always prints a JSON array to stdout (one entry per file, in alphabetical order) with progress lines on stderr, so the output stays machine-readable.
 
-```bash
-python main.py filename.txt --json
-```
+**Flags:**
 
-## Example
+| Flag | Values | Default | Description |
+|------|--------|---------|-------------|
+| `--file` | file path | — | Single file to summarize |
+| `--batch` | directory path | — | Process all top-level `.txt` files in a folder |
+| `--length` | `short`, `medium`, `long` | `medium` | Summary length |
+| `--json` | — | off | Single-file mode: output a JSON object instead of formatted text |
+
+`--file` and `--batch` are mutually exclusive; exactly one is required.
+
+## Example Output
 
 **Input** (`article.txt`):
 
-> The city council met on Tuesday to discuss the proposed downtown redevelopment plan. The plan includes new bike lanes, expanded green space, and mixed-use housing. Several residents voiced concerns about parking availability and construction noise. The council responded that a parking study is already underway and construction would be limited to daytime hours. A final vote is scheduled for next month, and if approved, construction would begin in early spring.
+> The city council met on Tuesday to discuss the proposed downtown redevelopment plan. The plan includes new bike lanes, expanded green space, and mixed-use housing. Several residents voiced concerns about parking availability and construction noise. A final vote is scheduled for next month.
 
-**Output:**
-
+**`python3 main.py --file article.txt`:**
 ```
 📖 Loaded file: article.txt
 
 ✅ Summary:
 The city council reviewed a downtown redevelopment plan featuring bike lanes,
 green space, and mixed-use housing, while addressing resident concerns about
-parking and noise. A final vote is scheduled for next month, with construction
-potentially starting in early spring.
+parking and noise. A final vote is scheduled for next month.
 ```
 
-The summary above is real output from the Gemini API using the tested prompt.
-
-### JSON output
-
-With `--json`, the same run prints a single JSON object on stdout — and nothing else, so it's safe to pipe into `jq` or another tool:
-
-```bash
-python main.py article.txt --json
-```
-
+**`python3 main.py --file article.txt --json`:**
 ```json
 {
-  "summary": "The city council reviewed a downtown redevelopment plan featuring bike lanes, green space, and mixed-use housing, while addressing resident concerns about parking and noise. A final vote is scheduled for next month, with construction potentially starting in early spring.",
-  "word_count": 39,
-  "char_count": 268,
+  "summary": "The city council reviewed a downtown redevelopment plan featuring bike lanes, green space, and mixed-use housing, while addressing resident concerns about parking and noise. A final vote is scheduled for next month.",
+  "word_count": 33,
+  "char_count": 216,
   "source_file": "article.txt"
 }
 ```
 
-In JSON mode the progress and success lines are suppressed so stdout stays valid JSON; any warnings or errors still go to stderr.
+In JSON mode the progress and success lines are suppressed so stdout stays valid JSON; warnings and errors still go to stderr.
 
-## Error handling
+## Error Handling
 
-The tool is built for use in scripts and pipelines, so failures are predictable:
+Built for scripts and pipelines, so failures are predictable:
 
-- **Clean messages, no stack traces.** Every failure prints a single `❌`-prefixed line to stderr and exits with status `1`, so a successful run is unambiguous.
-- **File problems are caught explicitly** — missing file, a directory instead of a file, no read permission, binary/non-UTF-8 content, and empty (or whitespace-only) files each get their own clear message.
-- **API problems are handled gracefully** — a missing `GEMINI_API_KEY`, rate limits, Gemini server errors, network failures, and empty API responses all produce a plain-English message instead of a crash.
-- **Large files warn but don't block** — files over ~50,000 characters print a `⚠️` warning to stderr (the run still proceeds), so an unexpectedly slow or costly call doesn't catch you off guard.
+- **Clean messages, no stack traces.** Every failure prints a single `❌`-prefixed line to stderr and exits with status `1`.
+- **File problems are caught explicitly** — missing file, directory instead of a file, no read permission, binary/non-UTF-8 content, and empty files each get their own clear message.
+- **API problems are handled gracefully** — a missing `GEMINI_API_KEY`, rate limits, server errors, network failures, and empty responses all produce a plain-English message instead of a crash.
+- **Large files warn but don't block** — files over ~50,000 characters print a `⚠️` warning to stderr and the run proceeds.
+- **Batch keeps going** — a failed file is recorded in the results array (`"error": "failed"`) and the remaining files are still processed; the run exits `1` if any file failed.
 
-Because errors and warnings go to stderr and never to stdout, `--json` output stays clean even when something goes wrong.
+## Tech Stack
 
-### Exit codes
+- **LLM:** Google Gemini (`gemini-flash-latest`, free tier via the `google-genai` SDK)
+- **Prompt design:** Versioned, manually tested prompt templates in `prompts.py`, separated from logic — test rounds logged in `test_prompts.md`
+- **Error handling:** All file and API errors caught; stack traces never reach the user
 
-| Code | Meaning |
-|------|---------|
-| `0`  | Success — a summary was produced |
-| `1`  | Any failure — bad arguments, an unreadable/empty file, or an API error |
-
-This makes the tool safe to chain in scripts: `python main.py doc.txt && echo "done"` only runs the next step on success.
-
-## How it works
-
-1. **Load & validate** — the input file is read as UTF-8 and checked for the failure cases above before anything else happens.
-2. **Prompt** — the text is dropped into `SUMMARIZE_PROMPT`, a template using role framing, explicit rules, and one worked example. This prompt was iterated version-against-version on claude.ai and the winner committed; the process is logged in `test_prompts.md`.
-3. **Summarize** — the prompt is sent to the Gemini API (`gemini-flash-latest`) via the `google-genai` SDK.
-4. **Output** — the result prints as a formatted summary, or as a JSON object with `--json`.
-
-## Project structure
+## Project Structure
 
 ```
 text-summarizer/
-├── main.py            # CLI: argument parsing, file loading, API call, output
-├── prompts.py         # Versioned, manually tested prompt templates
+├── main.py            # CLI entry point: argument parsing, file loading, API call, output
+├── prompts.py         # All prompt templates (no logic), versioned and tested
 ├── test_prompts.md    # Log of prompt tests and which version won
 ├── sample.txt         # Bundled example input for a zero-setup demo
 ├── requirements.txt   # Dependencies: google-genai, python-dotenv
 └── README.md          # This file
 ```
 
-## Requirements
+## License
 
-- Python 3.8+
-- A Gemini API key in a `.env` file (`GEMINI_API_KEY=...`)
-- Dependencies (`pip install -r requirements.txt`): `google-genai`, `python-dotenv`
-
-## Current status
-
-**Done**
-- [x] Project structure
-- [x] File loading with validation
-- [x] Error handling (missing, empty, or invalid files)
-- [x] Prompt engineering (tested and versioned)
-- [x] API integration (Gemini API)
-- [x] JSON output
-
-**Coming**
-- [ ] Batch processing (summarize multiple files at once)
-
-## Notes
-
-- The summarization prompt lives in `prompts.py` and has been tested manually; the winning version is committed with notes on why it won.
-- API calls use the Gemini API (`google-genai` SDK) and require a `GEMINI_API_KEY` set in a `.env` file (see `python-dotenv` in `requirements.txt`).
+MIT
