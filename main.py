@@ -13,18 +13,29 @@ import argparse
 import json
 import os
 import sys
+import threading
 
-import httpx
-from dotenv import load_dotenv
-from google import genai
-from google.genai import errors as genai_errors
+# The third-party imports (google-genai in particular) take over a
+# second to load, so a Ctrl+C during startup would land before the
+# KeyboardInterrupt handler at the bottom of this file exists. Guard
+# them so an early Ctrl+C still gets the clean goodbye, not a traceback.
+try:
+    import httpx
+    from dotenv import load_dotenv
+    from google import genai
+    from google.genai import errors as genai_errors
 
-from prompts import get_summarize_prompt
+    from prompts import get_summarize_prompt
+except KeyboardInterrupt:
+    print("\n👋 Summarization cancelled. Goodbye!", file=sys.stderr)
+    sys.exit(130)
 
 load_dotenv()
 
 USAGE = "Usage: python main.py --file <file_path> [--json] | python main.py --batch <directory>"
-MODEL_NAME = "gemini-flash-lite-latest"
+# Tried in order: if a model is unavailable, rate-limited, or the server
+# is busy, the next one is tried instead of failing the run.
+MODEL_NAMES = ["gemini-flash-lite-latest", "gemini-2.0-flash-lite", "gemini-2.0-flash"]
 LARGE_FILE_THRESHOLD = 50_000
 
 
@@ -34,6 +45,17 @@ class ArgParser(argparse.ArgumentParser):
     and exit status 1."""
 
     def error(self, message):
+        """Report an argument-parsing error and exit.
+
+        Args:
+            message (str): The error message produced by argparse.
+
+        Returns:
+            None: Never returns normally.
+
+        Raises:
+            SystemExit: Always, with exit status 1.
+        """
         print(f"❌ Error: {message}", file=sys.stderr)
         print(USAGE, file=sys.stderr)
         sys.exit(1)
@@ -55,6 +77,9 @@ def load_file(file_path, quiet=False):
 
     Returns:
         str | None: The file's text content, or None on failure.
+
+    Raises:
+        Does not raise. All exceptions are caught internally.
     """
     # Attempt the read directly and translate each failure into a clean
     # message. This also covers cases that pre-checks can't catch
@@ -108,13 +133,77 @@ def load_file(file_path, quiet=False):
     return text
 
 
+def _spin(stop: threading.Event) -> None:
+    """Animate a summarizing indicator until stop is set, then clear the line.
+
+    Drawn on stderr so stdout stays machine-readable (--json/batch modes).
+
+    Args:
+        stop (threading.Event): Event that ends the animation loop when set.
+
+    Returns:
+        None
+
+    Raises:
+        Does not raise.
+    """
+    frames = "⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏"
+    i = 0
+    while not stop.is_set():
+        print(
+            f"\r✍️  {frames[i % len(frames)]} summarizing…",
+            end="",
+            file=sys.stderr,
+            flush=True,
+        )
+        i += 1
+        stop.wait(0.1)
+    print("\r\033[K", end="", file=sys.stderr, flush=True)
+
+
+def _start_spinner() -> tuple[threading.Event, threading.Thread]:
+    """Start the summarizing spinner in a background thread.
+
+    Returns:
+        tuple[threading.Event, threading.Thread]: The stop event and the
+            spinner thread, both to be passed to _stop_spinner().
+
+    Raises:
+        Does not raise.
+    """
+    stop = threading.Event()
+    thread = threading.Thread(target=_spin, args=(stop,), daemon=True)
+    thread.start()
+    return stop, thread
+
+
+def _stop_spinner(stop: threading.Event, thread: threading.Thread) -> None:
+    """Stop the spinner and wait for it to clear its line. Safe to call twice.
+
+    Args:
+        stop (threading.Event): The stop event returned by _start_spinner().
+        thread (threading.Thread): The spinner thread returned by
+            _start_spinner().
+
+    Returns:
+        None
+
+    Raises:
+        Does not raise.
+    """
+    stop.set()
+    thread.join()
+
+
 def summarize(text, length="medium"):
     """
     Summarize the given text using the Gemini API.
 
     Day 2 change: replaces the Day 1 stub with a real call to the
-    Gemini API (model: gemini-flash-lite-latest) via the google-genai SDK, using
-    a prompt built by prompts.get_summarize_prompt(). Like
+    Gemini API via the google-genai SDK, using a prompt built by
+    prompts.get_summarize_prompt(). The models in MODEL_NAMES are tried
+    in order, falling back to the next one when a model is unavailable,
+    rate-limited, or the server is busy. Like
     load_file(), this prints its own user-facing error message (never
     a stack trace) and returns None on failure; callers only need to
     check for None.
@@ -127,6 +216,9 @@ def summarize(text, length="medium"):
 
     Returns:
         str | None: The summary text, or None on failure.
+
+    Raises:
+        Does not raise. All exceptions are caught internally.
     """
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
@@ -142,27 +234,52 @@ def summarize(text, length="medium"):
         print(f"❌ Error: {e}", file=sys.stderr)
         return None
 
-    try:
-        client = genai.Client(api_key=api_key)
-        response = client.models.generate_content(model=MODEL_NAME, contents=prompt)
-    except genai_errors.ClientError as e:
-        if e.code == 429:
-            print(
-                "❌ Error: Rate limit reached. Please wait a minute and try again.",
-                file=sys.stderr,
-            )
-        else:
+    client = genai.Client(api_key=api_key)
+    response = None
+    for model_name in MODEL_NAMES:
+        stop, spinner = _start_spinner()
+        try:
+            response = client.models.generate_content(model=model_name, contents=prompt)
+            break
+        except genai_errors.ClientError as e:
+            _stop_spinner(stop, spinner)
+            if e.code == 429:
+                print(
+                    f"⚠️  {model_name}: rate limit reached, trying next model...",
+                    file=sys.stderr,
+                )
+                continue
+            if e.code == 404:
+                print(
+                    f"⚠️  {model_name}: model unavailable, trying next model...",
+                    file=sys.stderr,
+                )
+                continue
             print(
                 f"❌ Error: Gemini API rejected the request: {e.message}",
                 file=sys.stderr,
             )
-        return None
-    except genai_errors.ServerError as e:
-        print(f"❌ Error: Gemini API server error: {e.message}", file=sys.stderr)
-        return None
-    except httpx.RequestError:
+            return None
+        except genai_errors.ServerError as e:
+            _stop_spinner(stop, spinner)
+            print(
+                f"⚠️  {model_name}: server error ({e.message}), trying next model...",
+                file=sys.stderr,
+            )
+            continue
+        except httpx.RequestError:
+            _stop_spinner(stop, spinner)
+            print(
+                "❌ Error: Could not reach the Gemini API. Check your network connection and try again.",
+                file=sys.stderr,
+            )
+            return None
+        finally:
+            _stop_spinner(stop, spinner)
+
+    if response is None:
         print(
-            "❌ Error: Could not reach the Gemini API. Check your network connection and try again.",
+            "❌ Error: All models are unavailable, busy, or rate-limited. Wait a minute and try again.",
             file=sys.stderr,
         )
         return None
@@ -195,8 +312,7 @@ def summarize_file(file_path, length="medium"):
             stderr by load_file() or summarize()).
 
     Raises:
-        Nothing: all failure modes are handled internally and
-            reported as None.
+        Does not raise. All exceptions are caught internally.
     """
     text = load_file(file_path, quiet=True)
     if text is None:
@@ -284,8 +400,7 @@ def run_batch(directory_path, length="medium"):
             file failed or the directory could not be read.
 
     Raises:
-        Nothing: directory read errors are caught and reported as a
-            clean stderr message per project convention.
+        Does not raise. All exceptions are caught internally.
     """
 
     def report_progress(index, total, filename):
@@ -336,6 +451,13 @@ def main():
     other tools. Batch mode always prints a JSON array on stdout.
     Exits with status 1 (after a usage hint) when arguments are
     missing or invalid.
+
+    Returns:
+        None: Returns normally after a successful single-file run.
+
+    Raises:
+        SystemExit: With status 1 on any failure, or with run_batch()'s
+            exit code in batch mode.
     """
     parser = ArgParser(
         description="Summarize a text file using the Gemini API.",
@@ -404,4 +526,12 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        # Clear any in-progress spinner line, then say a clean goodbye
+        # instead of dumping a traceback. 130 is the conventional exit
+        # code for a SIGINT-terminated process.
+        print("\r\033[K", end="", file=sys.stderr, flush=True)
+        print("\n👋 Summarization cancelled. Goodbye!", file=sys.stderr)
+        sys.exit(130)
